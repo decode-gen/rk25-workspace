@@ -837,7 +837,7 @@
       </div>
     </aside>
     <main class="main">
-      <header class="topbar"><div class="crumb"><span id="crumbModule">Dashboard v1</span> &nbsp;›&nbsp; <strong id="crumbTitle">Chọn một bài tập</strong></div><div class="actions"><button class="sql-studio-trigger" id="sqlStudioTriggerBtn" type="button" onclick="openSqlStudioModal()" title="Mở SQL Studio Full màn hình (Soạn thảo &amp; Preview tương tác)"><span class="sql-studio-badge">SQL</span> <span>Studio</span></button><button class="button" id="syncDriveBtn" type="button" onclick="triggerSyncDrive()" title="Đồng bộ tự động từ giáo trình RK-MODULE2-DATABASE trên Google Drive">⚡ Đồng bộ RK-Drive</button><button class="button" id="newTab" type="button">Mở tab mới</button><button class="button primary" id="openPage" type="button">Mở trang</button></div></header>
+      <header class="topbar"><div class="crumb"><span id="crumbModule">Dashboard v1</span> &nbsp;›&nbsp; <strong id="crumbTitle">Chọn một bài tập</strong></div><div class="actions"><button class="sql-studio-trigger" id="sqlStudioTriggerBtn" type="button" onclick="openSqlStudioModal()" title="Mở SQL Studio Full màn hình (Soạn thảo &amp; Preview tương tác)"><span class="sql-studio-badge">SQL</span> <span>Studio</span></button></div></header>
       <div class="content">
         <section class="intro"><h1 id="pageTitle">Learning Dashboard</h1><p id="pageDescription">Sidebar bên trái là cây thư mục học tập. Chọn một BTVN hoặc trang module để hiển thị HTML trực tiếp trong khung preview bên phải.</p><div class="stats"><div class="stat"><strong>5</strong><span>Modules</span></div><div class="stat"><strong>16</strong><span>Sessions M1</span></div><div class="stat"><strong>12</strong><span>Sessions M2</span></div><div class="stat"><strong>Live</strong><span>HTML Preview</span></div></div></section>
         <section class="preview-wrap" id="previewWrap">
@@ -1035,8 +1035,6 @@
     buildModule1Tree();
     const items = document.querySelectorAll('.item[data-title]');
     const previewBox = document.getElementById('previewBox');
-    const openPage = document.getElementById('openPage');
-    const newTab = document.getElementById('newTab');
     const search = document.getElementById('search');
     let selectedHref = '';
     function toast(message) { const node = document.getElementById('toast'); node.textContent = message; node.style.display = 'block'; window.clearTimeout(window.toastTimer); window.toastTimer = window.setTimeout(() => { node.style.display = 'none'; }, 2600); }
@@ -6202,8 +6200,6 @@ Hãy trả lời bằng tiếng Việt sư phạm, định dạng Markdown rõ r
       if (btvnKey && btvnDatabase[btvnKey]) {
         document.getElementById('pageDescription').textContent = 'Bảng trực quan gồm lý thuyết, nội dung README, biểu đồ dữ liệu và sơ đồ quan hệ của ' + title + '.';
         renderBtvnBoard(btvnKey);
-        openPage.disabled = true;
-        newTab.disabled = true;
         return;
       }
 
@@ -6211,16 +6207,12 @@ Hãy trả lời bằng tiếng Việt sư phạm, định dạng Markdown rõ r
         document.getElementById('pageDescription').textContent = 'Mục này hiện đang để trống, chờ bạn gửi dữ liệu bài tập.';
         previewBox.className = 'empty';
         previewBox.innerHTML = '<div style="font-size:14px;font-weight:bold;margin-bottom:8px;">⏳ Đang chờ nạp dữ liệu bài tập</div>Mục này đang để trống. Bạn chỉ cần gửi nội dung đề bài, hệ thống sẽ tự động cập nhật và sinh file SQL tương ứng.';
-        openPage.disabled = true;
-        newTab.disabled = true;
         return;
       }
 
       document.getElementById('pageDescription').textContent = 'Nội dung HTML đang được hiển thị trực tiếp từ thư mục dự án. Bạn có thể mở trang riêng để thao tác đầy đủ.';
       previewBox.className = 'frame-box';
       previewBox.innerHTML = '<iframe title="HTML preview" src="' + selectedHref + '"></iframe>';
-      openPage.disabled = false;
-      newTab.disabled = false;
     }
 
     function syncActiveMenu(activeItem, isInitial = false) {
@@ -6299,35 +6291,12 @@ Hãy trả lời bằng tiếng Việt sư phạm, định dạng Markdown rõ r
       });
     });
 
-    openPage.addEventListener('click', () => { if (selectedHref) window.location.href = selectedHref; else toast('Mục này chưa có file HTML.'); });
-    newTab.addEventListener('click', () => { if (selectedHref) window.open(selectedHref, '_blank', 'noopener'); else toast('Mục này chưa có file HTML.'); });
     search.addEventListener('input', () => {
       const query = search.value.trim().toLowerCase();
       document.querySelectorAll('.tree details, .tree .item').forEach((node) => {
         node.hidden = Boolean(query) && !node.textContent.toLowerCase().includes(query);
       });
     });
-
-    async function triggerSyncDrive() {
-      const btn = document.getElementById('syncDriveBtn');
-      const originalText = btn ? btn.textContent : '⚡ Đồng bộ RK-Drive';
-      if (btn) btn.textContent = '⏳ Đang đồng bộ...';
-      toast('Đang kết nối Google Drive và đồng bộ dữ liệu...');
-      try {
-        const response = await fetch('/api/sync', { method: 'POST' });
-        if (response.ok) {
-          const data = await response.json();
-          toast('✅ ' + (data.message || 'Đồng bộ thành công!'));
-          setTimeout(() => window.location.reload(), 1500);
-        } else {
-          throw new Error('HTTP ' + response.status);
-        }
-      } catch (error) {
-        toast('ℹ️ Để dùng nút này, hãy chạy Dashboard bằng file BANG_DIEU_KHIEN.bat (chọn [1]). Hoặc chọn mục [2] trên bảng điều khiển để đồng bộ ngay.');
-      } finally {
-        if (btn) btn.textContent = originalText;
-      }
-    }
 
     // =========================================================================
     // SQL WORKBENCH STUDIO MODAL (Fullscreen popup /rk-ui)
