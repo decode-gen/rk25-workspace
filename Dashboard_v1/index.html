@@ -3750,7 +3750,7 @@ Hãy trả lời bằng tiếng Việt sư phạm, định dạng Markdown rõ r
       }
     });
 
-    function selectItem(item, fromHistory = false) {
+    function selectItem(item, fromHistory = false, isInitial = false) {
       if (!item) return;
       if (!fromHistory) {
         if (currentNavTarget && currentNavTarget !== item) {
@@ -3774,7 +3774,7 @@ Hãy trả lời bằng tiếng Việt sư phạm, định dạng Markdown rõ r
       document.getElementById('previewTitle').textContent = title;
       
       document.querySelectorAll('.item').forEach((node) => node.classList.toggle('active', node === item));
-      syncActiveMenu(item, isInitialLoad);
+      syncActiveMenu(item, isInitial);
 
       if (btvnKey && btvnDatabase[btvnKey]) {
         document.getElementById('pageDescription').textContent = 'Bảng trực quan gồm lý thuyết, nội dung README, biểu đồ dữ liệu và sơ đồ quan hệ của ' + title + '.';
@@ -4636,7 +4636,7 @@ Yêu cầu: Trả lời bằng tiếng Việt sư phạm, thân thiện, rõ rà
       historyStack.push(btol3Item);
     }
     const defaultItem = document.querySelector('.item[href*="huong_dan_thi_mysql_workbench"]') || btol3Item;
-    selectItem(defaultItem, true);
+    selectItem(defaultItem, true, true);
     updateNavButtons();
   </script>
 </body>
