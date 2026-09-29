@@ -768,7 +768,24 @@
               <span class="item" data-btvn="s5_btvn5" data-title="BTVN 5 · Thống kê kết quả học tập sinh viên" data-module="Module 2 · Database" data-session="Session 05">BTVN 5 · Thống kê kết quả học tập sinh viên</span>
               <span class="item" data-btvn="s5_btvn6" data-title="BTVN 6 · Phân tích doanh thu bán hàng" data-module="Module 2 · Database" data-session="Session 05">BTVN 6 · Phân tích doanh thu bán hàng</span>
             </div></details>
-            <details><summary>Session 06–12 · Database nâng cao</summary><div class="items"><span class="item disabled">BTVN · Coming soon</span></div></details>
+            <details><summary>Session 06 · Luyện tập truy vấn tổng hợp</summary><div class="items">
+              <a class="item" href="../Module_2_Database/Session_06/theory6_advanced_queries.html" data-title="Lý thuyết · Kỹ thuật truy vấn nâng cao" data-module="Module 2 · Database" data-session="Session 06">Lý thuyết · Kỹ thuật truy vấn nâng cao</a>
+              <span class="item" data-btvn="s6_btvn1" data-title="BTVN 1 · Quản lý sản phẩm & danh mục" data-module="Module 2 · Database" data-session="Session 06">BTVN 1 · Quản lý sản phẩm & danh mục</span>
+              <span class="item" data-btvn="s6_btvn2" data-title="BTVN 2 · Quản lý khách hàng & đơn hàng" data-module="Module 2 · Database" data-session="Session 06">BTVN 2 · Quản lý khách hàng & đơn hàng</span>
+              <span class="item" data-btvn="s6_btvn3" data-title="BTVN 3 · Tìm kiếm sản phẩm nâng cao" data-module="Module 2 · Database" data-session="Session 06">BTVN 3 · Tìm kiếm sản phẩm nâng cao</span>
+              <span class="item" data-btvn="s6_btvn4" data-title="BTVN 4 · Thống kê doanh thu" data-module="Module 2 · Database" data-session="Session 06">BTVN 4 · Thống kê doanh thu</span>
+              <span class="item" data-btvn="s6_btvn5" data-title="BTVN 5 · Truy vấn tổng hợp hệ thống bán hàng" data-module="Module 2 · Database" data-session="Session 06">BTVN 5 · Truy vấn tổng hợp hệ thống bán hàng</span>
+            </div></details>
+            <details><summary>Session 07 · Tối ưu hóa VIEW & INDEX</summary><div class="items">
+              <a class="item" href="../Module_2_Database/Session_07/theory7_view_index.html" data-title="Lý thuyết · Khái niệm & Cú pháp VIEW & INDEX" data-module="Module 2 · Database" data-session="Session 07">Lý thuyết · Khái niệm & Cú pháp VIEW & INDEX</a>
+              <span class="item" data-btvn="s7_btvn1" data-title="BTVN 1 · Làm quen với View (Một bảng)" data-module="Module 2 · Database" data-session="Session 07">BTVN 1 · Làm quen với View (Một bảng)</span>
+              <span class="item" data-btvn="s7_btvn2" data-title="BTVN 2 · View từ nhiều bảng" data-module="Module 2 · Database" data-session="Session 07">BTVN 2 · View từ nhiều bảng</span>
+              <span class="item" data-btvn="s7_btvn3" data-title="BTVN 3 · Làm quen với Index (Một cột)" data-module="Module 2 · Database" data-session="Session 07">BTVN 3 · Làm quen với Index (Một cột)</span>
+              <span class="item" data-btvn="s7_btvn4" data-title="BTVN 4 · Index kết hợp (Nhiều cột)" data-module="Module 2 · Database" data-session="Session 07">BTVN 4 · Index kết hợp (Nhiều cột)</span>
+              <span class="item" data-btvn="s7_btvn5" data-title="BTVN 5 · View phục vụ phân quyền truy cập" data-module="Module 2 · Database" data-session="Session 07">BTVN 5 · View phục vụ phân quyền truy cập</span>
+              <span class="item" data-btvn="s7_btvn6" data-title="BTVN 6 · Index tìm kiếm theo nhiều điều kiện" data-module="Module 2 · Database" data-session="Session 07">BTVN 6 · Index tìm kiếm theo nhiều điều kiện</span>
+            </div></details>
+            <details><summary>Session 08–12 · Database nâng cao</summary><div class="items"><span class="item disabled">BTVN · Coming soon</span></div></details>
           </div>
         </details>
         <details data-module="module 3 java core"><summary class="module-summary"><span>Module 3 · Java Core</span><span class="status">1 HTML</span></summary><div class="items"><a class="item" href="../Module_3_Java_Core/index.html" data-title="Module 3 · Java Core" data-module="Module 3 · Java Core" data-session="Overview">Mở trang module</a></div></details>
@@ -2896,6 +2913,617 @@ INSERT INTO order_items VALUES ('ORD01', 'May in HP', 2, 4500000.00), ('ORD02', 
 
 SELECT o.order_id, SUM(oi.quantity * oi.price) AS total_order FROM orders o INNER JOIN order_items oi ON o.order_id = oi.order_id GROUP BY o.order_id;
 SELECT c.customer_name, SUM(oi.quantity * oi.price) AS total_spent FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id INNER JOIN order_items oi ON o.order_id = oi.order_id GROUP BY c.customer_name HAVING SUM(oi.quantity * oi.price) > 5000000;`
+      }
+,
+
+      s6_btvn1: {
+        key: 's6_btvn1',
+        title: 'BTVN 1 · Quản lý sản phẩm & danh mục (Session 06)',
+        readmeFolder: 'BTVN_1_QuanLySanPhamDanhMuc',
+        sqlFileName: 'BTVN_S6_1_QuanLySanPhamDanhMuc.sql',
+        theory: [
+          'Thao tác cơ bản: INSERT thêm sản phẩm, UPDATE sửa giá theo id, DELETE xóa sản phẩm.',
+          'Sắp xếp kết quả: ORDER BY price DESC kết hợp bí danh ALIAS.',
+          'Gom nhóm thống kê: COUNT(p.product_id) kết hợp GROUP BY c.category_id, c.category_name.'
+        ],
+        readme: {
+          entity: 'categories (1) ||--o{ products (N)',
+          attributes: 'categories(category_id, category_name) | products(product_id, product_name, price, category_id)',
+          pk: 'categories: category_id | products: product_id',
+          note: 'Quản lý mối quan hệ danh mục và sản phẩm, thao tác DML và truy vấn gom nhóm.'
+        },
+        schema: [
+          { type: 'INT', field: 'product_id', key: 'PK', desc: 'Mã định danh sản phẩm' },
+          { type: 'VARCHAR(150)', field: 'product_name', key: '-', desc: 'Tên sản phẩm' },
+          { type: 'DECIMAL(10,2)', field: 'price', key: '-', desc: 'Đơn giá sản phẩm' },
+          { type: 'INT', field: 'category_id', key: 'FK', desc: 'Khóa ngoại tham chiếu categories' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">categories<small>category_id · PK (1)</small></div>
+            <div class="relation-line" data-rel="1:N"></div>
+            <div class="entity-node">products<small>product_id · PK · category_id · FK (N)</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE categories (
+    category_id INT PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(150) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    category_id INT,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
+);
+
+INSERT INTO categories VALUES (1, 'Dien tu'), (2, 'Gia dung'), (3, 'Thoi trang');
+
+-- 1. Thêm 3 sản phẩm mới
+INSERT INTO products VALUES 
+(101, 'Ban phim co RK Royal', 1250000.00, 1),
+(102, 'Chuot gaming Logitech', 890000.00, 1),
+(103, 'Noi chien Philips', 2450000.00, 2),
+(104, 'Ao khoac hoodie', 450000.00, 3);
+
+-- 2. Cập nhật giá sản phẩm 101
+UPDATE products SET price = 1350000.00 WHERE product_id = 101;
+
+-- 3. Xóa sản phẩm 104
+DELETE FROM products WHERE product_id = 104;
+
+-- 4. Hiển thị tất cả sản phẩm, sắp xếp giá giảm dần
+SELECT p.product_id, p.product_name, p.price, c.category_name 
+FROM products p
+LEFT JOIN categories c ON p.category_id = c.category_id
+ORDER BY p.price DESC;
+
+-- 5. Thống kê số lượng sản phẩm cho từng danh mục
+SELECT c.category_name, COUNT(p.product_id) AS total_products
+FROM categories c
+LEFT JOIN products p ON c.category_id = p.category_id
+GROUP BY c.category_id, c.category_name;`
+      },
+
+      s6_btvn2: {
+        key: 's6_btvn2',
+        title: 'BTVN 2 · Quản lý Khách hàng & Đơn hàng (Session 06)',
+        readmeFolder: 'BTVN_2_QuanLyKhachHangDonHang',
+        sqlFileName: 'BTVN_S6_2_QuanLyKhachHangDonHang.sql',
+        theory: [
+          'Phép nối bảng: INNER JOIN tìm khách đã mua, LEFT JOIN + IS NULL tìm khách chưa mua.',
+          'Tính toán doanh thu khách hàng: SUM(quantity * price) kết hợp GROUP BY customer_id.',
+          'Truy vấn con Subquery: Lọc khách hàng mua món hàng đắt đỏ nhất.'
+        ],
+        readme: {
+          entity: 'customers (1) ||--o{ orders (1) ||--o{ order_details (N)',
+          attributes: 'customers, orders, order_details',
+          pk: 'customer_id, order_id, order_detail_id',
+          note: 'Phân tích hành vi mua sắm khách hàng và doanh thu tích lũy.'
+        },
+        schema: [
+          { type: 'VARCHAR(10)', field: 'customer_id', key: 'PK', desc: 'Mã khách hàng' },
+          { type: 'VARCHAR(100)', field: 'customer_name', key: '-', desc: 'Họ tên khách hàng' },
+          { type: 'VARCHAR(100)', field: 'email', key: '-', desc: 'Địa chỉ thư điện tử' }
+        ],
+        relationMap: `
+          <div class="relation-map" style="grid-template-columns: minmax(80px, 1fr) 50px minmax(80px, 1fr) 50px minmax(90px, 1fr);">
+            <div class="entity-node">customers<small>customer_id · PK</small></div>
+            <div class="relation-line" data-rel="1:N"></div>
+            <div class="entity-node">orders<small>order_id · PK</small></div>
+            <div class="relation-line" data-rel="1:N"></div>
+            <div class="entity-node">order_details<small>od_id · PK</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE customers (
+    customer_id VARCHAR(10) PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100)
+);
+
+CREATE TABLE orders (
+    order_id VARCHAR(10) PRIMARY KEY,
+    order_date DATE NOT NULL,
+    customer_id VARCHAR(10),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+
+CREATE TABLE order_details (
+    order_detail_id INT PRIMARY KEY,
+    order_id VARCHAR(10),
+    product_name VARCHAR(150) NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(12,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+INSERT INTO customers VALUES ('KH01', 'Nguyen Van An', 'an@gmail.com'), ('KH02', 'Tran Thi Bich', 'bich@gmail.com');
+-- 1. Thêm 2 khách hàng mới
+INSERT INTO customers VALUES ('KH03', 'Le Hoang Nam', 'nam@gmail.com'), ('KH04', 'Pham Thu Ha', 'ha@gmail.com');
+
+INSERT INTO orders VALUES ('ORD101', '2026-09-10', 'KH01'), ('ORD102', '2026-09-15', 'KH02');
+INSERT INTO order_details VALUES (1, 'ORD101', 'Laptop Dell', 1, 32000000.00), (2, 'ORD102', 'Man hinh LG', 1, 6500000.00);
+
+-- 2. Liệt kê khách hàng đã có ít nhất một đơn hàng
+SELECT DISTINCT c.customer_id, c.customer_name FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id;
+
+-- 3. Tìm khách hàng chưa từng đặt đơn hàng nào
+SELECT c.customer_id, c.customer_name FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id WHERE o.order_id IS NULL;
+
+-- 4. Tính toán tổng doanh thu mỗi khách hàng
+SELECT c.customer_name, COALESCE(SUM(od.quantity * od.price), 0) AS total_spent
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+LEFT JOIN order_details od ON o.order_id = od.order_id
+GROUP BY c.customer_id, c.customer_name;
+
+-- 5. Khách hàng đã mua sản phẩm có giá cao nhất
+SELECT c.customer_name, od.product_name, od.price
+FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_details od ON o.order_id = od.order_id
+WHERE od.price = (SELECT MAX(price) FROM order_details);`
+      },
+
+      s6_btvn3: {
+        key: 's6_btvn3',
+        title: 'BTVN 3 · Tìm kiếm sản phẩm nâng cao (Session 06)',
+        readmeFolder: 'BTVN_3_TimKiemSanPhamNangCao',
+        sqlFileName: 'BTVN_S6_3_TimKiemSanPhamNangCao.sql',
+        theory: [
+          'Điều kiện khoảng: BETWEEN val1 AND val2 lọc dữ liệu liên tục trong ngưỡng.',
+          'Tìm kiếm mờ: LIKE %Pro% tìm kiếm chuỗi con linh hoạt.',
+          'So sánh nâng cao: Subquery WHERE price > (SELECT AVG(price) FROM products).'
+        ],
+        readme: {
+          entity: 'categories ||--o{ products',
+          attributes: 'categories, products',
+          pk: 'category_id, product_id',
+          note: 'Truy vấn phân tích giá trị trung bình và tìm kiếm theo tiêu chí phức tạp.'
+        },
+        schema: [
+          { type: 'INT', field: 'product_id', key: 'PK', desc: 'Mã sản phẩm' },
+          { type: 'VARCHAR(150)', field: 'product_name', key: '-', desc: 'Tên sản phẩm' },
+          { type: 'DECIMAL(10,2)', field: 'price', key: '-', desc: 'Giá bán' },
+          { type: 'INT', field: 'category_id', key: 'FK', desc: 'Mã danh mục' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">categories<small>category_id (1)</small></div>
+            <div class="relation-line" data-rel="1:N"></div>
+            <div class="entity-node">products<small>BETWEEN · LIKE · AVG (N)</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE categories (category_id INT PRIMARY KEY, category_name VARCHAR(100));
+CREATE TABLE products (product_id INT PRIMARY KEY, product_name VARCHAR(150), price DECIMAL(10,2), category_id INT);
+
+INSERT INTO categories VALUES (1, 'Laptop & PC'), (2, 'Phu kien thiet bi');
+INSERT INTO products VALUES 
+(201, 'Laptop Dell Latitude 7420 Pro', 18500000.00, 1),
+(202, 'Laptop Macbook Air M2', 24900000.00, 1),
+(203, 'Chuot Logitech MX Master 3S', 2200000.00, 2),
+(204, 'Ban phim Bluetooth Mini', 650000.00, 2);
+
+-- 1. Tìm sản phẩm trong khoảng giá từ 2.000.000 đến 20.000.000
+SELECT * FROM products WHERE price BETWEEN 2000000.00 AND 20000000.00;
+
+-- 2. Tìm sản phẩm chứa từ khóa 'Pro'
+SELECT * FROM products WHERE product_name LIKE '%Pro%';
+
+-- 3. Tính giá trung bình sản phẩm theo danh mục
+SELECT c.category_name, ROUND(AVG(p.price), 2) AS avg_price 
+FROM categories c JOIN products p ON c.category_id = p.category_id GROUP BY c.category_name;
+
+-- 4. Tìm sản phẩm có giá cao hơn mức giá trung bình toàn bộ kho
+SELECT * FROM products WHERE price > (SELECT AVG(price) FROM products);`
+      },
+
+      s6_btvn4: {
+        key: 's6_btvn4',
+        title: 'BTVN 4 · Thống kê Doanh thu (Session 06)',
+        readmeFolder: 'BTVN_4_ThongKeDoanhThu',
+        sqlFileName: 'BTVN_S6_4_ThongKeDoanhThu.sql',
+        theory: [
+          'Tổng doanh thu: SUM(quantity * unit_price) tính tổng dòng tiền.',
+          'Doanh thu trung bình mỗi đơn: AVG(order_total) dựa trên Subquery gom nhóm đơn hàng.',
+          'Phân hạng Top N: ORDER BY total_sold_quantity DESC LIMIT 3 xác định sản phẩm bán chạy nhất.'
+        ],
+        readme: {
+          entity: 'orders ||--o{ order_details',
+          attributes: 'orders, order_details',
+          pk: 'order_id, detail_id',
+          note: 'Báo cáo doanh thu cửa hàng, đơn hàng giá trị nhất và top sản phẩm hot.'
+        },
+        schema: [
+          { type: 'VARCHAR(10)', field: 'order_id', key: 'PK', desc: 'Mã đơn hàng' },
+          { type: 'DATE', field: 'order_date', key: '-', desc: 'Ngày giao dịch' },
+          { type: 'VARCHAR(100)', field: 'customer_name', key: '-', desc: 'Tên người mua' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">orders<small>order_id · PK (1)</small></div>
+            <div class="relation-line" data-rel="1:N"></div>
+            <div class="entity-node">order_details<small>SUM · AVG · LIMIT 3 (N)</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE orders (order_id VARCHAR(10) PRIMARY KEY, order_date DATE, customer_name VARCHAR(100));
+CREATE TABLE order_details (detail_id INT PRIMARY KEY, order_id VARCHAR(10), product_name VARCHAR(150), quantity INT, unit_price DECIMAL(12,2));
+
+INSERT INTO orders VALUES ('DH01', '2026-09-01', 'Nguyen Van A'), ('DH02', '2026-09-05', 'Tran Thi B');
+INSERT INTO order_details VALUES (1, 'DH01', 'iPhone 15 Pro', 1, 28000000.00), (2, 'DH01', 'Op lung', 2, 350000.00), (3, 'DH02', 'iPad Air M2', 1, 16500000.00);
+
+-- 1. Thêm đơn hàng mới
+INSERT INTO orders VALUES ('DH03', '2026-09-20', 'Le Van C');
+INSERT INTO order_details VALUES (4, 'DH03', 'Tai nghe Sony', 2, 4500000.00);
+
+-- 2. Tổng doanh thu cửa hàng
+SELECT SUM(quantity * unit_price) AS total_revenue FROM order_details;
+
+-- 3. Doanh thu trung bình mỗi đơn hàng
+SELECT AVG(order_total) AS avg_order_revenue FROM (SELECT order_id, SUM(quantity * unit_price) AS order_total FROM order_details GROUP BY order_id) AS t;
+
+-- 4. Đơn hàng có doanh thu cao nhất
+SELECT o.order_id, o.customer_name, SUM(od.quantity * od.unit_price) AS total_val
+FROM orders o JOIN order_details od ON o.order_id = od.order_id
+GROUP BY o.order_id, o.customer_name ORDER BY total_val DESC LIMIT 1;
+
+-- 5. Top 3 sản phẩm bán chạy nhất
+SELECT product_name, SUM(quantity) AS total_qty FROM order_details GROUP BY product_name ORDER BY total_qty DESC LIMIT 3;`
+      },
+
+      s6_btvn5: {
+        key: 's6_btvn5',
+        title: 'BTVN 5 · Truy vấn tổng hợp hệ thống bán hàng (Session 06)',
+        readmeFolder: 'BTVN_5_TruyVanTongHopHeThongBanHang',
+        sqlFileName: 'BTVN_S6_5_TruyVanTongHopHeThongBanHang.sql',
+        theory: [
+          'Tái tổ hợp 5 bảng: categories, products, customers, orders, order_details.',
+          'Phân tích Top khách hàng: ORDER BY total_spending DESC LIMIT 5.',
+          'Lọc tồn kho ế: LEFT JOIN ... WHERE order_detail_id IS NULL phát hiện sản phẩm chưa từng bán.'
+        ],
+        readme: {
+          entity: 'categories -> products -> order_details <- orders <- customers',
+          attributes: 'Hệ thống 5 thực thể chuẩn hóa thương mại điện tử',
+          pk: 'Khóa chính chuẩn hóa',
+          note: 'Truy vấn bao quát toàn bộ quy trình từ danh mục, sản phẩm đến đơn hàng và khách hàng.'
+        },
+        schema: [
+          { type: 'INT', field: 'product_id', key: 'PK', desc: 'Mã sản phẩm' },
+          { type: 'VARCHAR(150)', field: 'product_name', key: '-', desc: 'Tên sản phẩm' },
+          { type: 'DECIMAL(12,2)', field: 'price', key: '-', desc: 'Giá niêm yết' }
+        ],
+        relationMap: `
+          <div class="relation-map" style="grid-template-columns: minmax(70px,1fr) 30px minmax(70px,1fr) 30px minmax(70px,1fr) 30px minmax(70px,1fr);">
+            <div class="entity-node">categories</div>
+            <div class="relation-line"></div>
+            <div class="entity-node">products</div>
+            <div class="relation-line"></div>
+            <div class="entity-node">orders</div>
+            <div class="relation-line"></div>
+            <div class="entity-node">customers</div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE categories (category_id INT PRIMARY KEY, category_name VARCHAR(100));
+CREATE TABLE products (product_id INT PRIMARY KEY, product_name VARCHAR(150), price DECIMAL(12,2), category_id INT);
+CREATE TABLE customers (customer_id VARCHAR(10) PRIMARY KEY, customer_name VARCHAR(100));
+CREATE TABLE orders (order_id VARCHAR(10) PRIMARY KEY, order_date DATE, customer_id VARCHAR(10));
+CREATE TABLE order_details (order_detail_id INT PRIMARY KEY, order_id VARCHAR(10), product_id INT, quantity INT, price DECIMAL(12,2));
+
+INSERT INTO categories VALUES (1, 'Dien thoai'), (2, 'Gia dung');
+INSERT INTO products VALUES (1, 'iPhone 15', 22000000.00, 1), (2, 'Robot hut bui', 8500000.00, 2), (3, 'San pham ton kho', 150000.00, 2);
+INSERT INTO customers VALUES ('C01', 'Nguyen Van A'), ('C02', 'Tran Thi B');
+INSERT INTO orders VALUES ('O01', '2026-09-01', 'C01'), ('O02', '2026-09-03', 'C02');
+INSERT INTO order_details VALUES (1, 'O01', 1, 1, 22000000.00), (2, 'O02', 2, 1, 8500000.00);
+
+-- 1. Liệt kê sản phẩm kèm tên danh mục
+SELECT p.product_name, c.category_name FROM products p JOIN categories c ON p.category_id = c.category_id;
+
+-- 2. Đếm số đơn hàng của từng khách hàng
+SELECT c.customer_name, COUNT(o.order_id) AS total_orders FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id, c.customer_name;
+
+-- 3. Top khách hàng chi tiêu nhiều nhất
+SELECT c.customer_name, SUM(od.quantity * od.price) AS total_spend FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_details od ON o.order_id = od.order_id GROUP BY c.customer_id, c.customer_name ORDER BY total_spend DESC LIMIT 5;
+
+-- 4. Sản phẩm chưa từng bán
+SELECT p.product_name FROM products p LEFT JOIN order_details od ON p.product_id = od.product_id WHERE od.product_id IS NULL;`
+      },
+
+      s7_btvn1: {
+        key: 's7_btvn1',
+        title: 'BTVN 1 · Làm quen với View một bảng (Session 07)',
+        readmeFolder: 'BTVN_1_LamQuenVoiView',
+        sqlFileName: 'BTVN_S7_1_LamQuenVoiView.sql',
+        theory: [
+          'Khái niệm VIEW: Bảng ảo đại diện cho câu truy vấn SELECT, không lưu dữ liệu vật lý.',
+          'Bảo mật thông tin: Ẩn cột năm sinh và địa chỉ cá nhân, chỉ mở quyền xem họ tên và lớp.',
+          'Cú pháp chuẩn: CREATE VIEW view_name AS SELECT col1, col2 FROM table;'
+        ],
+        readme: {
+          entity: 'students (Bảng gốc) -> v_student_basic (View ảo)',
+          attributes: 'students(student_id, full_name, birth_year, class_name, address)',
+          pk: 'student_id',
+          note: 'Thiết lập VIEW chọn lọc để phục vụ giảng viên xem danh sách sinh viên.'
+        },
+        schema: [
+          { type: 'VARCHAR(20)', field: 'student_id', key: 'PK', desc: 'Mã số sinh viên' },
+          { type: 'VARCHAR(100)', field: 'full_name', key: '-', desc: 'Họ và tên' },
+          { type: 'VARCHAR(50)', field: 'class_name', key: '-', desc: 'Lớp học phụ trách' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">students<small>Bảng vật lý lưu trên đĩa</small></div>
+            <div class="relation-line" data-rel="VIEW"></div>
+            <div class="entity-node">v_student_basic<small>Bảng ảo không tốn bộ nhớ</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE students (
+    student_id VARCHAR(20) PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    birth_year INT,
+    class_name VARCHAR(50),
+    address VARCHAR(200)
+);
+
+INSERT INTO students VALUES 
+('SV001', 'Nguyen Van An', 2004, 'JV2403', 'Hanoi'),
+('SV002', 'Tran Thi Bich', 2005, 'JV2403', 'Danang'),
+('SV003', 'Le Hoang Nam', 2004, 'JV2405', 'Saigon');
+
+-- Yêu cầu: Tạo VIEW v_student_basic chỉ chứa mã sinh viên, họ tên, lớp học
+CREATE VIEW v_student_basic AS
+SELECT student_id, full_name, class_name
+FROM students;
+
+-- Truy vấn trực tiếp từ VIEW như một bảng thông thường
+SELECT * FROM v_student_basic;`
+      },
+
+      s7_btvn2: {
+        key: 's7_btvn2',
+        title: 'BTVN 2 · View từ nhiều bảng (Session 07)',
+        readmeFolder: 'BTVN_2_ViewTuNhieuBang',
+        sqlFileName: 'BTVN_S7_2_ViewTuNhieuBang.sql',
+        theory: [
+          'Đóng gói logic JOIN: View chứa sẵn phép INNER JOIN giữa orders và customers.',
+          'Tối ưu hóa thao tác: Nhân viên bán hàng chỉ cần SELECT * FROM v_order_info.',
+          'Đồng bộ tức thời: Khi dữ liệu bảng gốc đổi, kết quả trong View tự động đổi theo.'
+        ],
+        readme: {
+          entity: 'customers (1) ||--o{ orders (N) ===> v_order_info',
+          attributes: 'customers, orders',
+          pk: 'customer_id, order_id',
+          note: 'Tạo View kết hợp dữ liệu nhiều bảng phục vụ bộ phận kinh doanh.'
+        },
+        schema: [
+          { type: 'VARCHAR(20)', field: 'order_id', key: 'PK', desc: 'Mã đơn hàng' },
+          { type: 'DATE', field: 'order_date', key: '-', desc: 'Ngày giao dịch' },
+          { type: 'VARCHAR(100)', field: 'customer_name', key: '-', desc: 'Tên khách hàng (từ bảng customers)' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">customers (1)</div>
+            <div class="relation-line" data-rel="JOIN"></div>
+            <div class="entity-node">orders (N)</div>
+            <div class="relation-line" data-rel="VIEW"></div>
+            <div class="entity-node">v_order_info</div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE customers (
+    customer_id VARCHAR(20) PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE orders (
+    order_id VARCHAR(20) PRIMARY KEY,
+    order_date DATE NOT NULL,
+    customer_id VARCHAR(20),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+
+INSERT INTO customers VALUES ('KH01', 'Sun Asterisk'), ('KH02', 'FPT Software');
+INSERT INTO orders VALUES ('ORD01', '2026-09-01', 'KH01'), ('ORD02', '2026-09-05', 'KH02');
+
+-- Yêu cầu: Tạo VIEW v_order_info kết hợp 2 bảng
+CREATE VIEW v_order_info AS
+SELECT o.order_id, o.order_date, c.customer_name
+FROM orders o
+INNER JOIN customers c ON o.customer_id = c.customer_id;
+
+-- Kiểm tra dữ liệu qua View
+SELECT * FROM v_order_info;`
+      },
+
+      s7_btvn3: {
+        key: 's7_btvn3',
+        title: 'BTVN 3 · Làm quen với Index một cột (Session 07)',
+        readmeFolder: 'BTVN_3_LamQuenVoiIndex',
+        sqlFileName: 'BTVN_S7_3_LamQuenVoiIndex.sql',
+        theory: [
+          'Bản chất INDEX: Cấu trúc B-Tree lưu trữ vị trí con trỏ dữ liệu giúp tìm kiếm O(log N).',
+          'Tránh Full Table Scan: Khi bảng có 1.000.000 dòng, Index tìm kiếm trong vài mili-giây.',
+          'Cú pháp: CREATE INDEX idx_name ON table_name(column_name);'
+        ],
+        readme: {
+          entity: 'employees(employee_id, full_name, department, salary)',
+          attributes: 'Cột department được đánh chỉ mục',
+          pk: 'employee_id',
+          note: 'Tạo Index tăng tốc truy vấn lọc theo phòng ban.'
+        },
+        schema: [
+          { type: 'VARCHAR(20)', field: 'employee_id', key: 'PK', desc: 'Mã định danh nhân viên' },
+          { type: 'VARCHAR(100)', field: 'full_name', key: '-', desc: 'Họ tên nhân viên' },
+          { type: 'VARCHAR(100)', field: 'department', key: 'INDEX', desc: 'Phòng ban (Được đánh chỉ mục)' },
+          { type: 'DECIMAL(12,2)', field: 'salary', key: '-', desc: 'Mức lương cơ bản' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">B-Tree Index<small>idx_employees_department</small></div>
+            <div class="relation-line" data-rel="POINTER"></div>
+            <div class="entity-node">employees<small>Tìm kiếm phòng ban tức thì</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE employees (
+    employee_id VARCHAR(20) PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    department VARCHAR(100) NOT NULL,
+    salary DECIMAL(12,2) NOT NULL
+);
+
+INSERT INTO employees VALUES 
+('NV01', 'Doan Minh Quan', 'Phong Ky Thuat', 18000000.00),
+('NV02', 'Pham Thi Thu', 'Phong Nhan Su', 14000000.00),
+('NV03', 'Bui Tuan Kiet', 'Phong Ky Thuat', 22000000.00);
+
+-- Yêu cầu: Tạo INDEX cho cột department
+CREATE INDEX idx_employees_department ON employees(department);
+
+-- Kiểm tra truy vấn tận dụng Index
+SELECT * FROM employees WHERE department = 'Phong Ky Thuat';`
+      },
+
+      s7_btvn4: {
+        key: 's7_btvn4',
+        title: 'BTVN 4 · Index kết hợp nhiều cột (Session 07)',
+        readmeFolder: 'BTVN_4_IndexKetHop',
+        sqlFileName: 'BTVN_S7_4_IndexKetHop.sql',
+        theory: [
+          'Composite Index: Chỉ mục tạo trên 2 hoặc nhiều cột đồng thời.',
+          'Quy tắc tiền tố bên trái (Left-to-Right): Index (category, price) tối ưu khi lọc theo category, hoặc cả category + price.',
+          'Giảm chi phí sắp xếp và quét bảng trong các truy vấn thương mại điện tử.'
+        ],
+        readme: {
+          entity: 'products(product_id, product_name, category, price)',
+          attributes: 'Composite Index trên (category, price)',
+          pk: 'product_id',
+          note: 'Tối ưu hóa các thao tác lọc sản phẩm theo nhóm danh mục và mức giá.'
+        },
+        schema: [
+          { type: 'VARCHAR(20)', field: 'product_id', key: 'PK', desc: 'Mã sản phẩm' },
+          { type: 'VARCHAR(150)', field: 'product_name', key: '-', desc: 'Tên sản phẩm' },
+          { type: 'VARCHAR(100)', field: 'category', key: 'INDEX', desc: 'Loại sản phẩm (Cột 1 Index)' },
+          { type: 'DECIMAL(12,2)', field: 'price', key: 'INDEX', desc: 'Giá bán (Cột 2 Index)' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">Composite Index<small>(category, price)</small></div>
+            <div class="relation-line" data-rel="FAST SCAN"></div>
+            <div class="entity-node">products<small>Lọc nhanh danh mục & giá</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE products (
+    product_id VARCHAR(20) PRIMARY KEY,
+    product_name VARCHAR(150) NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    price DECIMAL(12,2) NOT NULL
+);
+
+INSERT INTO products VALUES 
+('P01', 'Ban phim co RK84', 'Ban Phim', 1200000.00),
+('P02', 'Ban phim custom Keychron', 'Ban Phim', 2500000.00),
+('P03', 'Chuot gaming G502', 'Chuot', 1450000.00);
+
+-- Yêu cầu: Tạo INDEX kết hợp (category, price)
+CREATE INDEX idx_products_category_price ON products(category, price);
+
+-- Kiểm tra truy vấn kết hợp lọc danh mục và giá bán
+SELECT * FROM products WHERE category = 'Ban Phim' AND price <= 2000000.00;`
+      },
+
+      s7_btvn5: {
+        key: 's7_btvn5',
+        title: 'BTVN 5 · View phục vụ phân quyền truy cập (Session 07)',
+        readmeFolder: 'BTVN_5_ViewPhanQuyenTruyCap',
+        sqlFileName: 'BTVN_S7_5_ViewPhanQuyenTruyCap.sql',
+        theory: [
+          'Nguyên tắc bảo vệ dữ liệu nhạy cảm: Tuyệt đối không để lộ số CMND/CCCD và tiền lương cho nhân sự ngoài ban quản lý.',
+          'Tạo lớp nhìn an toàn: Phân quyền GRANT SELECT trên v_employee_public thay vì bảng employees.',
+          'Kỹ thuật chuẩn doanh nghiệp trong quản trị cơ sở dữ liệu lớn.'
+        ],
+        readme: {
+          entity: 'employees (Bảng gốc bảo mật) ===> v_employee_public (Công khai)',
+          attributes: 'employees(employee_id, full_name, department, salary, identity_card)',
+          pk: 'employee_id',
+          note: 'Thiết kế View lọc bỏ triệt để các trường nhạy cảm trong hệ thống nhân sự.'
+        },
+        schema: [
+          { type: 'VARCHAR(20)', field: 'employee_id', key: 'PK', desc: 'Mã nhân viên' },
+          { type: 'VARCHAR(100)', field: 'full_name', key: '-', desc: 'Họ tên nhân viên' },
+          { type: 'VARCHAR(100)', field: 'department', key: '-', desc: 'Phòng ban công tác' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">employees<small>salary · identity_card (ẨN)</small></div>
+            <div class="relation-line" data-rel="SECURE VIEW"></div>
+            <div class="entity-node">v_employee_public<small>Chỉ hiển thị thông tin công khai</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE employees (
+    employee_id VARCHAR(20) PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    department VARCHAR(100) NOT NULL,
+    salary DECIMAL(12,2) NOT NULL,
+    identity_card VARCHAR(20) NOT NULL
+);
+
+INSERT INTO employees VALUES 
+('EMP01', 'Nguyen Van Thang', 'P.Hanh Chinh', 12000000.00, '001200012345'),
+('EMP02', 'Le Thi Ngoc Anh', 'P.Ke Toan', 16000000.00, '001200054321');
+
+-- Yêu cầu: Tạo VIEW v_employee_public chỉ chứa mã nhân viên, họ tên, phòng ban
+CREATE VIEW v_employee_public AS
+SELECT employee_id, full_name, department
+FROM employees;
+
+-- Nhân viên phòng ban khác chỉ được phép xem thông qua View này
+SELECT * FROM v_employee_public;`
+      },
+
+      s7_btvn6: {
+        key: 's7_btvn6',
+        title: 'BTVN 6 · Index tìm kiếm theo nhiều điều kiện (Session 07)',
+        readmeFolder: 'BTVN_6_IndexTimKiemNhieuDieuKien',
+        sqlFileName: 'BTVN_S7_6_IndexTimKiemNhieuDieuKien.sql',
+        theory: [
+          'Độ ưu tiên cột chỉ mục: Đặt cột có độ chọn lọc bằng nhau (như order_status) trước cột khoảng ngày (order_date).',
+          'Tối ưu hóa đơn hàng: Thường xuyên tìm kiếm các đơn "Hoàn tất" hoặc "Đang giao" trong ngày.',
+          'Kiểm tra kế hoạch thực thi: Sử dụng EXPLAIN hoặc EXPLAIN QUERY PLAN.'
+        ],
+        readme: {
+          entity: 'orders(order_id, order_date, order_status, total_amount)',
+          attributes: 'Composite Index trên (order_status, order_date)',
+          pk: 'order_id',
+          note: 'Thiết kế Index phục vụ lọc trạng thái và ngày giao dịch đơn hàng.'
+        },
+        schema: [
+          { type: 'VARCHAR(20)', field: 'order_id', key: 'PK', desc: 'Mã đơn hàng' },
+          { type: 'DATE', field: 'order_date', key: 'INDEX', desc: 'Ngày đặt hàng' },
+          { type: 'VARCHAR(50)', field: 'order_status', key: 'INDEX', desc: 'Trạng thái xử lý' },
+          { type: 'DECIMAL(12,2)', field: 'total_amount', key: '-', desc: 'Tổng tiền đơn hàng' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">Composite Index<small>(order_status, order_date)</small></div>
+            <div class="relation-line" data-rel="FAST FILTER"></div>
+            <div class="entity-node">orders<small>Tra cứu trạng thái & mốc thời gian</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE orders (
+    order_id VARCHAR(20) PRIMARY KEY,
+    order_date DATE NOT NULL,
+    order_status VARCHAR(50) NOT NULL,
+    total_amount DECIMAL(12,2) NOT NULL
+);
+
+INSERT INTO orders VALUES 
+('ORD_101', '2026-09-01', 'Hoan tat', 4500000.00),
+('ORD_102', '2026-09-02', 'Cho xu ly', 1200000.00),
+('ORD_103', '2026-09-05', 'Hoan tat', 8900000.00);
+
+-- Yêu cầu: Tạo INDEX kết hợp (order_status, order_date)
+CREATE INDEX idx_orders_status_date ON orders(order_status, order_date);
+
+-- Kiểm tra truy vấn tìm kiếm đơn hàng hoàn tất theo mốc thời gian
+SELECT * FROM orders 
+WHERE order_status = 'Hoan tat' AND order_date >= '2026-09-01';`
       }
     };
 

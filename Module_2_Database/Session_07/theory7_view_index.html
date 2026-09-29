@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lý thuyết Session 07 · VIEW &amp; INDEX trong MySQL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    /* RK WORKSPACE DESIGN SYSTEM (/rk-ui) - Nền sáng tối giản, viền xám, CHỈ SQL NỀN ĐEN */
+    :root {
+      --bg-main: #f4f4f4;
+      --bg-card: #ffffff;
+      --bg-soft: #f7f7f7;
+      --line: #e5e5e5;
+      --line-strong: #d9d9d9;
+      --black: #111111;
+      --ink: #202020;
+      --text-muted: #666666;
+      --code-bg: #111111;
+      --code-text: #f5f5f5;
+      --font-system: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-code: 'JetBrains Mono', Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-main);
+      color: var(--ink);
+      font-family: var(--font-system);
+      line-height: 1.6;
+      padding: 16px 20px 48px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header {
+      background: var(--bg-card);
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .badge {
+      display: inline-block;
+      background: var(--bg-soft);
+      color: var(--black);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+      border: 1px solid var(--line);
+    }
+    h1 { font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 6px; letter-spacing: -.03em; }
+    p.lead { font-size: 12.5px; color: #444; line-height: 1.6; margin-bottom: 12px; }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    h2 { font-size: 15px; font-weight: 800; color: var(--black); margin-bottom: 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+    h3 { font-size: 13px; font-weight: 700; color: #222; margin: 12px 0 6px; }
+    p, li { font-size: 12.5px; color: #333; line-height: 1.6; }
+    ul, ol { padding-left: 18px; margin-bottom: 10px; }
+    li { margin-bottom: 4px; }
+    /* QUY TẮC BẤT KHẢ XÂM PHẠM: CHỈ KHUNG SQL MỚI ĐƯỢC NỀN ĐEN */
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-family: var(--font-code);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 14px 16px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 10px 0 14px;
+      border: 1px solid #222;
+    }
+    code { font-family: var(--font-code); font-size: 11.5px; }
+    .note-box {
+      background: var(--bg-soft);
+      border-left: 3px solid var(--black);
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-size: 12px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Module 2 · Session 07</span>
+      <h1>Lý thuyết Tối ưu hóa CSDL: VIEW &amp; INDEX trong MySQL</h1>
+      <p class="lead">Nắm vững nguyên lý hoạt động của Bảng ảo (View) và Chỉ mục tìm kiếm (Index) để tối ưu hiệu năng và bảo mật trong hệ quản trị cơ sở dữ liệu.</p>
+    </header>
+
+    <div class="card">
+      <h2>1. Tổng quan về VIEW (Bảng ảo)</h2>
+      <p><strong>VIEW</strong> cho phép tổng hợp kết quả từ một hoặc nhiều bảng tùy theo tiêu chí mong muốn. Bản chất của View là một câu lệnh truy vấn SQL được lưu trữ trên server cơ sở dữ liệu. Khi truy xuất dữ liệu từ View, hệ thống thực thi câu truy vấn này và trả về dữ liệu cập nhật tức thời theo các bảng thành phần.</p>
+      
+      <div class="grid-2">
+        <div class="note-box">
+          <strong>Cú pháp tạo View:</strong>
+          <pre><code>CREATE [OR REPLACE] VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;</code></pre>
+        </div>
+        <div class="note-box">
+          <strong>Thao tác quản lý View:</strong>
+          <pre><code>-- Thay đổi View
+ALTER VIEW view_name AS SELECT ...;
+
+-- Xóa View
+DROP VIEW IF EXISTS view_name;</code></pre>
+        </div>
+      </div>
+
+      <h3>Lợi ích cốt lõi của VIEW:</h3>
+      <ul>
+        <li><strong>Đơn giản hóa truy vấn:</strong> Giảm thiểu việc phải viết đi viết lại các câu lệnh JOIN phức tạp giữa 4-5 bảng.</li>
+        <li><strong>Bảo mật &amp; Phân quyền:</strong> Ẩn các cột dữ liệu nhạy cảm (như mật khẩu, mức lương, số CCCD/CMND) đối với người dùng không có thẩm quyền.</li>
+        <li><strong>Tương thích ngược:</strong> Hỗ trợ tái cấu trúc bảng mà không làm hỏng các phần mềm hay ứng dụng cũ đang truy vấn CSDL.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>2. Tổng quan về INDEX (Chỉ mục tìm kiếm)</h2>
+      <p><strong>INDEX</strong> là một cấu trúc dữ liệu đặc biệt (thường dạng B-Tree) giúp hệ quản trị CSDL nhanh chóng xác định vị trí của bản ghi mà không cần quét tuần tự toàn bộ bảng (Full Table Scan).</p>
+      
+      <div class="grid-2">
+        <div class="note-box">
+          <strong>Index đơn (Một cột):</strong>
+          <p>Áp dụng cho cột thường xuyên xuất hiện độc lập trong mệnh đề <code>WHERE</code>, <code>JOIN</code> hoặc <code>ORDER BY</code>.</p>
+          <pre><code>CREATE INDEX idx_department 
+ON employees(department);</code></pre>
+        </div>
+        <div class="note-box">
+          <strong>Index kết hợp (Nhiều cột - Composite Index):</strong>
+          <p>Áp dụng cho các truy vấn lọc đồng thời nhiều điều kiện theo thứ tự ưu tiên từ trái qua phải.</p>
+          <pre><code>CREATE INDEX idx_status_date 
+ON orders(order_status, order_date);</code></pre>
+        </div>
+      </div>
+
+      <h3>Lưu ý khi tạo và quản trị Index:</h3>
+      <ul>
+        <li><strong>Ưu điểm:</strong> Tăng tốc độ truy vấn <code>SELECT</code> lên gấp hàng chục đến hàng trăm lần đối với bảng dữ liệu lớn.</li>
+        <li><strong>Chi phí đánh đổi:</strong> Làm chậm tốc độ các câu lệnh ghi dữ liệu (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) vì mỗi lần thay đổi dữ liệu, hệ thống phải cập nhật lại cây chỉ mục.</li>
+        <li><strong>Nguyên tắc vàng:</strong> Chỉ tạo Index trên các cột có tần suất tìm kiếm cao, độ chọn lọc lớn (High Cardinality) và không tạo thừa chỉ mục.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
