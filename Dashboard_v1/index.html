@@ -717,7 +717,7 @@
           </div>
         </details>
         <details data-module="module 2 database">
-          <summary class="module-summary"><span>Module 2 · Database</span><span class="status">3 BTOL · 52 BTVN · 5 Theory</span></summary>
+          <summary class="module-summary"><span>Module 2 · Database</span><span class="status">3 BTOL · 63 BTVN · 7 Theory</span></summary>
           <div class="session-tree">
             <details><summary>Session 00 · Ôn tập Online (BTOL)</summary><div class="items">
               <span class="item" data-title="BTOL 1 · Chờ nạp dữ liệu" data-module="Module 2 · Database" data-session="Session 00">BTOL 1 · (Chờ nạp dữ liệu)</span>
@@ -812,7 +812,23 @@
               <span class="item" data-btvn="s10_btvn5" data-title="BTVN 5 · Ghi nhật ký trạng thái đơn hàng" data-module="Module 2 · Database" data-session="Session 10">BTVN 5 · Ghi nhật ký trạng thái đơn hàng</span>
               <span class="item" data-btvn="s10_btvn6" data-title="BTVN 6 · Kiểm tra tồn kho trước khi thêm giỏ" data-module="Module 2 · Database" data-session="Session 10">BTVN 6 · Kiểm tra tồn kho trước khi thêm giỏ</span>
             </div></details>
-            <details><summary>Session 11–12 · Database nâng cao</summary><div class="items"><span class="item disabled">BTVN · Coming soon</span></div></details>
+            <details><summary>Session 11 · Transaction & ACID (6 BTVN)</summary><div class="items">
+              <a class="item" href="../Module_2_Database/Session_11/theory11_transactions_acid.html" target="_blank" style="color:var(--text-primary);font-weight:700;">📘 Lý thuyết · Transaction & ACID</a>
+              <span class="item" data-btvn="s11_btvn1" data-title="BTVN 1 · Gửi tiền vào tài khoản" data-module="Module 2 · Database" data-session="Session 11">BTVN 1 · Gửi tiền vào tài khoản</span>
+              <span class="item" data-btvn="s11_btvn2" data-title="BTVN 2 · Thủ tục rút tiền an toàn" data-module="Module 2 · Database" data-session="Session 11">BTVN 2 · Thủ tục rút tiền an toàn</span>
+              <span class="item" data-btvn="s11_btvn3" data-title="BTVN 3 · Nạp tiền & ghi lịch sử" data-module="Module 2 · Database" data-session="Session 11">BTVN 3 · Nạp tiền & ghi lịch sử</span>
+              <span class="item" data-btvn="s11_btvn4" data-title="BTVN 4 · Chuyển tiền liên tài khoản" data-module="Module 2 · Database" data-session="Session 11">BTVN 4 · Chuyển tiền liên tài khoản</span>
+              <span class="item" data-btvn="s11_btvn5" data-title="BTVN 5 · Kiểm tra & bắt lỗi chuyển tiền" data-module="Module 2 · Database" data-session="Session 11">BTVN 5 · Kiểm tra & bắt lỗi chuyển tiền</span>
+              <span class="item" data-btvn="s11_btvn6" data-title="BTVN 6 · Hủy đơn hàng & hoàn tồn kho" data-module="Module 2 · Database" data-session="Session 11">BTVN 6 · Hủy đơn hàng & hoàn tồn kho</span>
+            </div></details>
+            <details><summary>Session 12 · Tổng hợp Trigger & Transaction (5 BTVN)</summary><div class="items">
+              <a class="item" href="../Module_2_Database/Session_12/theory12_full_triggers_transactions.html" target="_blank" style="color:var(--text-primary);font-weight:700;">📘 Lý thuyết · Trigger & Transaction</a>
+              <span class="item" data-btvn="s12_btvn1" data-title="BTVN 1 · 6 loại Trigger Ecommerce" data-module="Module 2 · Database" data-session="Session 12">BTVN 1 · 6 loại Trigger Ecommerce</span>
+              <span class="item" data-btvn="s12_btvn2" data-title="BTVN 2 · Transaction tạo đơn hàng" data-module="Module 2 · Database" data-session="Session 12">BTVN 2 · Transaction tạo đơn hàng</span>
+              <span class="item" data-btvn="s12_btvn3" data-title="BTVN 3 · Thanh toán & hủy đơn hoàn kho" data-module="Module 2 · Database" data-session="Session 12">BTVN 3 · Thanh toán & hủy đơn hoàn kho</span>
+              <span class="item" data-btvn="s12_btvn4" data-title="BTVN 4 · Trigger quản trị nhân sự" data-module="Module 2 · Database" data-session="Session 12">BTVN 4 · Trigger quản trị nhân sự</span>
+              <span class="item" data-btvn="s12_btvn5" data-title="BTVN 5 · Transaction tăng lương & xóa NV" data-module="Module 2 · Database" data-session="Session 12">BTVN 5 · Transaction tăng lương & xóa NV</span>
+            </div></details>
           </div>
         </details>
         <details data-module="module 3 java core"><summary class="module-summary"><span>Module 3 · Java Core</span><span class="status">1 HTML</span></summary><div class="items"><a class="item" href="../Module_3_Java_Core/index.html" data-title="Module 3 · Java Core" data-module="Module 3 · Java Core" data-session="Overview">Mở trang module</a></div></details>
@@ -4623,6 +4639,599 @@ INSERT INTO cart_items (product_id, quantity) VALUES (1, 2);
 
 SELECT * FROM cart_items;`
       },
+      s11_btvn1: {
+        key: 's11_btvn1',
+        title: 'BTVN 1 · Gửi tiền vào tài khoản (Session 11)',
+        readmeFolder: 'BTVN_1_GuiTienVaoTaiKhoan',
+        sqlFileName: 'BTVN_S11_1_GuiTienVaoTaiKhoan.sql',
+        theory: [
+          'Khái niệm Transaction: Chuỗi thao tác SQL được thực thi như một đơn vị công việc duy nhất.',
+          'START TRANSACTION & COMMIT: Mở phiên làm việc và xác nhận lưu dữ liệu vĩnh viễn xuống đĩa.',
+          'Bảo toàn dữ liệu: Ngăn chặn tình trạng thay đổi bị mất khi ứng dụng xảy ra sự cố đột ngột.'
+        ],
+        readme: {
+          entity: 'accounts(account_id, customer_name, balance)',
+          attributes: 'Cộng thêm 1.000.000 VNĐ vào tài khoản an toàn với Transaction',
+          pk: 'account_id',
+          note: 'Tạo bảng accounts kèm 10 tài khoản mẫu và thực thi transaction nạp tiền.'
+        },
+        schema: [
+          { type: 'INT', field: 'account_id', key: 'PK', desc: 'Mã số tài khoản ngân hàng' },
+          { type: 'VARCHAR(100)', field: 'customer_name', key: '-', desc: 'Tên chủ tài khoản' },
+          { type: 'DECIMAL(12,2)', field: 'balance', key: '-', desc: 'Số dư khả dụng hiện tại' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">START TRANSACTION<small>Mở phiên giao dịch</small></div>
+            <div class="relation-line" data-rel="UPDATE +1M"></div>
+            <div class="entity-node">COMMIT<small>Lưu vĩnh viễn số dư</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE accounts (
+    account_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    balance DECIMAL(12,2) NOT NULL DEFAULT 0.00
+);
+
+INSERT INTO accounts (customer_name, balance) VALUES
+('Nguyen Van An', 5000000.00),
+('Tran Thi Mai', 300000.00);
+
+-- Thực thi giao dịch nạp tiền an toàn:
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance + 1000000.00 WHERE account_id = 1;
+COMMIT;
+
+SELECT * FROM accounts WHERE account_id = 1;`
+      },
+
+      s11_btvn2: {
+        key: 's11_btvn2',
+        title: 'BTVN 2 · Thủ tục rút tiền an toàn với Rollback (Session 11)',
+        readmeFolder: 'BTVN_2_SPRutTienTransaction',
+        sqlFileName: 'BTVN_S11_2_SPRutTienTransaction.sql',
+        theory: [
+          'Kỹ thuật Optimistic Check: Thử trừ tiền trước, nếu kiểm tra balance < 0 thì hoàn tác.',
+          'Lệnh ROLLBACK: Khôi phục toàn bộ trạng thái dữ liệu về trước khi bắt đầu transaction.',
+          'Bảo vệ tài khoản: Tuyệt đối không cho phép số dư bị âm trong các giao dịch rút tiền mặt.'
+        ],
+        readme: {
+          entity: 'accounts(account_id, customer_name, balance)',
+          attributes: 'Thủ tục withdraw_money tự động ROLLBACK khi tài khoản không đủ tiền',
+          pk: 'account_id',
+          note: 'Kiểm thử rút 500k từ tài khoản 300k (bị hủy) và rút 100k (thành công).'
+        },
+        schema: [
+          { type: 'INT', field: 'p_account_id', key: 'IN', desc: 'Mã tài khoản rút tiền' },
+          { type: 'DECIMAL(12,2)', field: 'p_amount', key: 'IN', desc: 'Số tiền muốn rút' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">balance < 0 ?<small>Kiểm tra số dư</small></div>
+            <div class="relation-line" data-rel="YES -> ROLLBACK"></div>
+            <div class="entity-node">Số dư không đổi<small>Bảo toàn tài khoản</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE accounts (
+    account_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    balance DECIMAL(12,2) NOT NULL DEFAULT 0.00
+);
+
+INSERT INTO accounts (customer_name, balance) VALUES ('Tran Thi Mai', 300000.00);
+
+-- Mô phỏng logic rút tiền trên Web SQLite:
+-- Trường hợp rút 100.000đ (Hợp lệ vì 300.000 >= 100.000):
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance - 100000.00 WHERE account_id = 1;
+COMMIT;
+
+SELECT * FROM accounts WHERE account_id = 1;
+
+-- [Cú pháp MySQL Stored Procedure chuẩn]:
+-- DELIMITER //
+-- CREATE PROCEDURE withdraw_money(IN p_acc_id INT, IN p_amount DECIMAL(12,2))
+-- BEGIN
+--     DECLARE v_bal DECIMAL(12,2);
+--     START TRANSACTION;
+--     UPDATE accounts SET balance = balance - p_amount WHERE account_id = p_acc_id;
+--     SELECT balance INTO v_bal FROM accounts WHERE account_id = p_acc_id;
+--     IF v_bal < 0 THEN ROLLBACK; SELECT 'Số dư không đủ' AS message;
+--     ELSE COMMIT; SELECT 'Rút tiền thành công' AS message; END IF;
+-- END //
+-- DELIMITER ;`
+      },
+
+      s11_btvn3: {
+        key: 's11_btvn3',
+        title: 'BTVN 3 · Nạp tiền & ghi lịch sử All-or-Nothing (Session 11)',
+        readmeFolder: 'BTVN_3_NapTienVaGhiLichSu',
+        sqlFileName: 'BTVN_S11_3_NapTienVaGhiLichSu.sql',
+        theory: [
+          'Nguyên tắc All-or-Nothing (Atomicity): Cộng tiền và ghi log phải đồng thời thành công.',
+          'DECLARE EXIT HANDLER FOR SQLEXCEPTION: Tự động bắt lỗi runtime và Rollback toàn bộ.',
+          'Đối soát ngân hàng: Mỗi biến động tài khoản bắt buộc phải có bản ghi lịch sử tương ứng.'
+        ],
+        readme: {
+          entity: 'transactions(transaction_id, account_id, amount, log_message, transaction_date)',
+          attributes: 'Thủ tục deposit_with_logging nạp tiền kèm ghi audit log',
+          pk: 'transaction_id',
+          note: 'Nếu ghi log thất bại thì tiền cộng thêm cũng bị hủy bỏ ngay lập tức.'
+        },
+        schema: [
+          { type: 'INT', field: 'transaction_id', key: 'PK', desc: 'Mã giao dịch đối soát' },
+          { type: 'INT', field: 'account_id', key: 'FK', desc: 'Tài khoản nạp tiền' },
+          { type: 'DECIMAL(12,2)', field: 'amount', key: '-', desc: 'Số tiền nạp' },
+          { type: 'VARCHAR(255)', field: 'log_message', key: '-', desc: 'Nội dung ghi chú giao dịch' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">UPDATE accounts<small>Cộng số dư</small></div>
+            <div class="relation-line" data-rel="AND"></div>
+            <div class="entity-node">INSERT transactions<small>Ghi log lịch sử</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE accounts (
+    account_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    balance DECIMAL(12,2) NOT NULL DEFAULT 0.00
+);
+
+CREATE TABLE transactions (
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    account_id INT NOT NULL,
+    amount DECIMAL(12,2) NOT NULL,
+    log_message VARCHAR(255) NOT NULL,
+    transaction_date DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO accounts (customer_name, balance) VALUES ('Le Hoang Nam', 200000.00);
+
+-- Giao dịch nạp tiền All-or-Nothing trên Web SQLite:
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance + 1000000.00 WHERE account_id = 1;
+INSERT INTO transactions (account_id, amount, log_message) 
+VALUES (1, 1000000.00, 'Nap tien vao tai khoan');
+COMMIT;
+
+SELECT * FROM accounts WHERE account_id = 1;
+SELECT * FROM transactions WHERE account_id = 1;`
+      },
+
+      s11_btvn4: {
+        key: 's11_btvn4',
+        title: 'BTVN 4 · Chuyển tiền liên tài khoản (Session 11)',
+        readmeFolder: 'BTVN_4_ChuyenTienGiuaHaiTaiKhoan',
+        sqlFileName: 'BTVN_S11_4_ChuyenTienGiuaHaiTaiKhoan.sql',
+        theory: [
+          'Tính nhất quán (Consistency): Tổng số tiền giữa 2 tài khoản trước và sau chuyển khoản phải bằng nhau.',
+          'Thao tác kép: Trừ tiền người gửi và cộng tiền người nhận trong cùng một Transaction.',
+          'Hủy giao dịch an toàn: Nếu số dư người gửi không đủ, toàn bộ thao tác chuyển bị hủy bỏ.'
+        ],
+        readme: {
+          entity: 'accounts(account_id, customer_name, balance)',
+          attributes: 'Thủ tục transfer_money chuyển tiền từ ID 4 sang ID 5',
+          pk: 'account_id',
+          note: 'Chuyển 300.000 VNĐ từ tài khoản A (2.000.000đ) sang tài khoản B (0đ).'
+        },
+        schema: [
+          { type: 'INT', field: 'p_sender_id', key: 'IN', desc: 'Mã tài khoản người gửi' },
+          { type: 'INT', field: 'p_receiver_id', key: 'IN', desc: 'Mã tài khoản người nhận' },
+          { type: 'DECIMAL(12,2)', field: 'p_amount', key: 'IN', desc: 'Số tiền chuyển khoản' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">Sender (-300k)<small>Trừ tiền gửi</small></div>
+            <div class="relation-line" data-rel="TRANSACTION"></div>
+            <div class="entity-node">Receiver (+300k)<small>Cộng tiền nhận</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE accounts (
+    account_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    balance DECIMAL(12,2) NOT NULL DEFAULT 0.00
+);
+
+INSERT INTO accounts (account_id, customer_name, balance) VALUES
+(4, 'Tai khoan A (Nguoi gui)', 2000000.00),
+(5, 'Tai khoan B (Nguoi nhan)', 0.00);
+
+-- Chuyển 300.000 VNĐ giữa 2 tài khoản an toàn trên Web SQLite:
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance - 300000.00 WHERE account_id = 4;
+UPDATE accounts SET balance = balance + 300000.00 WHERE account_id = 5;
+COMMIT;
+
+SELECT * FROM accounts WHERE account_id IN (4, 5);`
+      },
+
+      s11_btvn5: {
+        key: 's11_btvn5',
+        title: 'BTVN 5 · Kiểm tra & bắt lỗi chuyển tiền nâng cao (Session 11)',
+        readmeFolder: 'BTVN_5_KiemTraBatLoiChuyenTien',
+        sqlFileName: 'BTVN_S11_5_KiemTraBatLoiChuyenTien.sql',
+        theory: [
+          'Thẩm định đa lớp: Kiểm tra số tiền chuyển > 0, kiểm tra sự tồn tại của tài khoản nhận.',
+          'Bảo toàn số dư: Không để tài khoản bị âm hoặc chuyển tiền vào tài khoản ảo.',
+          'Thông điệp phản hồi rõ ràng: Báo lỗi chính xác cho người dùng khi giao dịch bị từ chối.'
+        ],
+        readme: {
+          entity: 'accounts(account_id, customer_name, balance)',
+          attributes: 'Thủ tục transfer_money_advanced với đầy đủ kiểm tra nghiệp vụ',
+          pk: 'account_id',
+          note: 'Từ chối các giao dịch chuyển tiền số âm hoặc người nhận không tồn tại.'
+        },
+        schema: [
+          { type: 'INT', field: 'p_sender_id', key: 'IN', desc: 'Tài khoản nguồn' },
+          { type: 'INT', field: 'p_receiver_id', key: 'IN', desc: 'Tài khoản đích' },
+          { type: 'DECIMAL(12,2)', field: 'p_amount', key: 'CHECK > 0', desc: 'Số tiền giao dịch' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">Thẩm định điều kiện<small>p_amount > 0 & Receiver tồn tại</small></div>
+            <div class="relation-line" data-rel="VALIDATED"></div>
+            <div class="entity-node">COMMIT / ROLLBACK<small>Chuyển tiền an toàn</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE accounts (
+    account_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    balance DECIMAL(12,2) NOT NULL DEFAULT 0.00
+);
+
+INSERT INTO accounts (account_id, customer_name, balance) VALUES
+(4, 'Tai khoan A (Nguoi gui)', 2000000.00),
+(5, 'Tai khoan B (Nguoi nhan)', 500000.00);
+
+-- Chuyển 500.000 VNĐ hợp lệ:
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance - 500000.00 WHERE account_id = 4;
+UPDATE accounts SET balance = balance + 500000.00 WHERE account_id = 5;
+COMMIT;
+
+SELECT * FROM accounts WHERE account_id IN (4, 5);`
+      },
+
+      s11_btvn6: {
+        key: 's11_btvn6',
+        title: 'BTVN 6 · Hủy đơn hàng & hoàn tồn kho (Session 11)',
+        readmeFolder: 'BTVN_6_HuyDonHangHoanTonKho',
+        sqlFileName: 'BTVN_S11_6_HuyDonHangHoanTonKho.sql',
+        theory: [
+          'Reverse Transaction: Đảo ngược quy trình kinh doanh một cách toàn vẹn.',
+          'Hoàn trả số lượng kho (Restocking): Tự động cộng lại số lượng sản phẩm vào bảng products.',
+          'Kiểm tra trạng thái đơn: Ngăn chặn việc hủy đơn hàng nhiều lần liên tiếp.'
+        ],
+        readme: {
+          entity: 'cancel_order(p_order_id)',
+          attributes: 'Cập nhật đơn thành Cancelled và cộng hoàn lại tồn kho trong Transaction',
+          pk: 'order_id',
+          note: 'Quy trình hủy đơn hàng chuẩn thương mại điện tử.'
+        },
+        schema: [
+          { type: 'INT', field: 'order_id', key: 'PK', desc: 'Mã số đơn hàng' },
+          { type: 'INT', field: 'product_id', key: 'FK', desc: 'Mã thiết bị sản phẩm' },
+          { type: 'INT', field: 'quantity', key: '-', desc: 'Số lượng mua cần hoàn kho' },
+          { type: 'VARCHAR(50)', field: 'status', key: '-', desc: 'Trạng thái đơn (Completed/Cancelled)' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">orders.status = 'Cancelled'<small>Hủy đơn hàng</small></div>
+            <div class="relation-line" data-rel="RESTOCK"></div>
+            <div class="entity-node">products.stock (+qty)<small>Cộng hoàn lại kho</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    stock INT NOT NULL CHECK (stock >= 0)
+);
+
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'Completed'
+);
+
+INSERT INTO products VALUES (1, 'Laptop Dell Inspiron', 6);
+INSERT INTO orders VALUES (1, 1, 2, 'Completed');
+
+-- Thực thi quy trình hủy đơn và hoàn kho trên Web SQLite:
+BEGIN TRANSACTION;
+UPDATE orders SET status = 'Cancelled' WHERE order_id = 1;
+UPDATE products SET stock = stock + 2 WHERE product_id = 1;
+COMMIT;
+
+SELECT * FROM orders WHERE order_id = 1;
+SELECT * FROM products WHERE product_id = 1;`
+      },
+
+      s12_btvn1: {
+        key: 's12_btvn1',
+        title: 'BTVN 1 · 6 loại Trigger Ecommerce (Session 12)',
+        readmeFolder: 'BTVN_1_TriggerEcommerceTongHop',
+        sqlFileName: 'BTVN_S12_1_TriggerEcommerceTongHop.sql',
+        theory: [
+          'Hệ sinh thái Trigger: Làm chủ 6 biến thể (BEFORE/AFTER cho INSERT, UPDATE, DELETE).',
+          'Tự động tính tổng tiền: Cập nhật orders.total_amount khi thêm/sửa item trong order_items.',
+          'Kiểm soát toàn vẹn: Không cho phép xóa đơn hàng đã thanh toán (Completed).'
+        ],
+        readme: {
+          entity: 'order_items(item_id, order_id, product_id, quantity, price)',
+          attributes: 'Trọn bộ 6 Trigger tự động hóa bán hàng và quản lý kho',
+          pk: 'item_id',
+          note: 'Áp dụng cho CSDL thương mại điện tử hoàn chỉnh.'
+        },
+        schema: [
+          { type: 'INT', field: 'item_id', key: 'PK', desc: 'Mã chi tiết đơn hàng' },
+          { type: 'INT', field: 'order_id', key: 'FK', desc: 'Mã đơn hàng liên kết' },
+          { type: 'INT', field: 'product_id', key: 'FK', desc: 'Mã mặt hàng' },
+          { type: 'INT', field: 'quantity', key: '-', desc: 'Số lượng mua' },
+          { type: 'DECIMAL(10,2)', field: 'price', key: '-', desc: 'Đơn giá niêm yết' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">order_items (CRUD)<small>Sự kiện thay đổi</small></div>
+            <div class="relation-line" data-rel="6 TRIGGERS"></div>
+            <div class="entity-node">orders & inventory<small>Đồng bộ tiền & kho</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    total_amount DECIMAL(12,2) DEFAULT 0.00,
+    status VARCHAR(50) DEFAULT 'Pending'
+);
+
+CREATE TABLE order_items (
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL
+);
+
+INSERT INTO orders (order_id, status) VALUES (1, 'Pending');
+
+-- Trigger tự động cộng tiền đơn hàng khi thêm item trên SQLite:
+CREATE TRIGGER trg_after_insert_order_items
+AFTER INSERT ON order_items
+FOR EACH ROW
+BEGIN
+    UPDATE orders 
+    SET total_amount = total_amount + (NEW.quantity * NEW.price)
+    WHERE order_id = NEW.order_id;
+END;
+
+-- Thêm sản phẩm 2 chiếc giá 20.000.000:
+INSERT INTO order_items (order_id, quantity, price) VALUES (1, 2, 20000000.00);
+
+-- Tổng tiền trong orders tự động nhảy thành 40.000.000:
+SELECT * FROM orders WHERE order_id = 1;`
+      },
+
+      s12_btvn2: {
+        key: 's12_btvn2',
+        title: 'BTVN 2 · Transaction tạo đơn hàng Ecommerce (Session 12)',
+        readmeFolder: 'BTVN_2_TransactionTaoDonHang',
+        sqlFileName: 'BTVN_S12_2_TransactionTaoDonHang.sql',
+        theory: [
+          'Thao tác đa bảng trong Transaction: Tạo orders, order_items và trừ inventory.',
+          'LAST_INSERT_ID(): Lấy mã đơn hàng vừa sinh để liên kết khóa ngoại chi tiết đơn.',
+          'Kiểm tra tồn kho: Hủy bỏ ngay lập tức nếu kho không đủ số lượng cung ứng.'
+        ],
+        readme: {
+          entity: 'sp_create_order(customer_id, product_id, quantity, price)',
+          attributes: 'Thủ tục tạo đơn hàng liên kết nhiều bảng bảo đảm Atomicity',
+          pk: 'order_id',
+          note: 'Quy trình tạo đơn hàng chuẩn doanh nghiệp.'
+        },
+        schema: [
+          { type: 'INT', field: 'customer_id', key: 'IN', desc: 'Mã khách mua' },
+          { type: 'INT', field: 'product_id', key: 'IN', desc: 'Mã sản phẩm chọn mua' },
+          { type: 'INT', field: 'quantity', key: 'IN', desc: 'Số lượng mua' },
+          { type: 'DECIMAL(10,2)', field: 'price', key: 'IN', desc: 'Giá tại thời điểm mua' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">sp_create_order<small>Bắt đầu Transaction</small></div>
+            <div class="relation-line" data-rel="ATOMIC"></div>
+            <div class="entity-node">orders, items, inventory<small>Đồng bộ dữ liệu</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE inventory (
+    product_id INT PRIMARY KEY,
+    stock INT NOT NULL CHECK (stock >= 0)
+);
+
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    status VARCHAR(50) DEFAULT 'Pending'
+);
+
+CREATE TABLE order_items (
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10,2)
+);
+
+INSERT INTO inventory VALUES (1, 15);
+
+-- Tạo đơn mua 3 chiếc bàn phím (kho còn 12) trên Web SQLite:
+BEGIN TRANSACTION;
+INSERT INTO orders (customer_id, status) VALUES (1, 'Pending');
+INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (1, 1, 3, 1500000.00);
+UPDATE inventory SET stock = stock - 3 WHERE product_id = 1;
+COMMIT;
+
+SELECT * FROM orders;
+SELECT * FROM order_items;
+SELECT * FROM inventory;`
+      },
+
+      s12_btvn3: {
+        key: 's12_btvn3',
+        title: 'BTVN 3 · Thanh toán & hủy đơn hoàn kho (Session 12)',
+        readmeFolder: 'BTVN_3_TransactionThanhToanVaHuyDon',
+        sqlFileName: 'BTVN_S12_3_TransactionThanhToanVaHuyDon.sql',
+        theory: [
+          'Thanh toán an toàn (sp_pay_order): Chèn payments và đổi status thành Completed.',
+          'Hủy đơn an toàn (sp_cancel_order): Đổi status Cancelled và hoàn trả tồn kho inventory.',
+          'Chỉ xử lý đơn Pending: Không cho phép thanh toán hoặc hủy đơn đã hoàn tất.'
+        ],
+        readme: {
+          entity: 'sp_pay_order & sp_cancel_order',
+          attributes: 'Hai thủ tục trọng yếu kiểm soát vòng đời giao dịch đơn hàng',
+          pk: 'order_id',
+          note: 'Bảo toàn dữ liệu tài chính và kho hàng.'
+        },
+        schema: [
+          { type: 'INT', field: 'order_id', key: 'IN', desc: 'Mã đơn hàng cần xử lý' },
+          { type: 'VARCHAR(50)', field: 'payment_method', key: 'IN', desc: 'Phương thức thanh toán' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">Đơn hàng Pending<small>Trạng thái chờ</small></div>
+            <div class="relation-line" data-rel="PAY / CANCEL"></div>
+            <div class="entity-node">Completed / Cancelled<small>Hoàn tất hoặc trả kho</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE inventory (product_id INT PRIMARY KEY, stock INT NOT NULL);
+CREATE TABLE orders (order_id INT AUTO_INCREMENT PRIMARY KEY, status VARCHAR(50) DEFAULT 'Pending');
+CREATE TABLE payments (payment_id INT AUTO_INCREMENT PRIMARY KEY, order_id INT, payment_method VARCHAR(50));
+
+INSERT INTO inventory VALUES (1, 10);
+INSERT INTO orders (status) VALUES ('Pending');
+
+-- Thanh toán đơn hàng số 1:
+BEGIN TRANSACTION;
+INSERT INTO payments (order_id, payment_method) VALUES (1, 'The Tin Dung');
+UPDATE orders SET status = 'Completed' WHERE order_id = 1;
+COMMIT;
+
+SELECT * FROM orders;
+SELECT * FROM payments;`
+      },
+
+      s12_btvn4: {
+        key: 's12_btvn4',
+        title: 'BTVN 4 · Trigger quản trị nhân sự (Session 12)',
+        readmeFolder: 'BTVN_4_TriggerQuanTriNhanSu',
+        sqlFileName: 'BTVN_S12_4_TriggerQuanTriNhanSu.sql',
+        theory: [
+          'Chuẩn hóa email tự động: Gắn đuôi @company.com ngay trước khi insert nhân viên.',
+          'Tự sinh mức lương cơ bản: Khởi tạo 10,000.00 trong salaries sau khi insert employees.',
+          'Tự động tính giờ làm việc: Tính tổng số giờ làm (total_hours) khi nhân viên checkout.'
+        ],
+        readme: {
+          entity: 'attendance(att_id, emp_id, check_in_time, check_out_time, total_hours)',
+          attributes: 'Bộ 3 Trigger tự động hóa quy trình nhân sự và chấm công',
+          pk: 'att_id',
+          note: 'Giảm thiểu sai sót thủ công của bộ phận nhân sự.'
+        },
+        schema: [
+          { type: 'INT', field: 'emp_id', key: 'PK', desc: 'Mã nhân viên' },
+          { type: 'VARCHAR(100)', field: 'email', key: 'AUTO', desc: 'Email chuẩn hóa @company.com' },
+          { type: 'DECIMAL(10,2)', field: 'base_salary', key: 'DEFAULT', desc: 'Lương cơ bản mặc định 10.000' },
+          { type: 'DECIMAL(4,2)', field: 'total_hours', key: 'CALC', desc: 'Giờ làm tự động tính' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">Thêm nhân viên mới<small>INSERT employees</small></div>
+            <div class="relation-line" data-rel="TRIGGERS"></div>
+            <div class="entity-node">Email chuẩn & Lương mặc định<small>Tự động hóa 100%</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE employees (
+    emp_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE salaries (
+    salary_id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_id INT NOT NULL,
+    base_salary DECIMAL(10,2) NOT NULL
+);
+
+-- Trigger tự tạo bản ghi lương mặc định trên SQLite:
+CREATE TRIGGER trg_employee_default_salary
+AFTER INSERT ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO salaries (emp_id, base_salary) VALUES (NEW.emp_id, 10000.00);
+END;
+
+INSERT INTO employees (full_name, email) VALUES ('Nguyen Van A', 'vana@company.com');
+
+SELECT * FROM employees;
+SELECT * FROM salaries;`
+      },
+
+      s12_btvn5: {
+        key: 's12_btvn5',
+        title: 'BTVN 5 · Transaction tăng lương & xóa nhân viên (Session 12)',
+        readmeFolder: 'BTVN_5_TransactionQuanTriNhanSu',
+        sqlFileName: 'BTVN_S12_5_TransactionQuanTriNhanSu.sql',
+        theory: [
+          'Quản lý tăng lương (IncreaseSalary): Cập nhật lương mới và lưu vết vào salary_history.',
+          'Xóa nhân viên an toàn (DeleteEmployee): Xóa nhân viên nhưng bảo toàn lịch sử lương.',
+          'Kiểm toán nhân sự: Lịch sử thay đổi thu nhập không bao giờ bị mất phục vụ thanh tra.'
+        ],
+        readme: {
+          entity: 'salary_history(history_id, emp_id, old_salary, new_salary, reason, change_date)',
+          attributes: 'Thủ tục IncreaseSalary và DeleteEmployee bảo đảm tính toàn vẹn',
+          pk: 'history_id',
+          note: 'Quy trình quản lý nhân sự cấp doanh nghiệp.'
+        },
+        schema: [
+          { type: 'INT', field: 'history_id', key: 'PK', desc: 'Mã bản ghi lịch sử kiểm toán' },
+          { type: 'INT', field: 'emp_id', key: '-', desc: 'Mã nhân viên' },
+          { type: 'DECIMAL(10,2)', field: 'old_salary', key: '-', desc: 'Lương trước điều chỉnh' },
+          { type: 'DECIMAL(10,2)', field: 'new_salary', key: '-', desc: 'Lương sau điều chỉnh' },
+          { type: 'VARCHAR(255)', field: 'reason', key: '-', desc: 'Lý do thăng chức / tăng lương' }
+        ],
+        relationMap: `
+          <div class="relation-map">
+            <div class="entity-node">IncreaseSalary<small>Tăng lương</small></div>
+            <div class="relation-line" data-rel="TRANSACTION"></div>
+            <div class="entity-node">salaries & salary_history<small>Cập nhật & Lưu vết</small></div>
+          </div>
+        `,
+        defaultSql: `CREATE TABLE employees (
+    emp_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE salaries (
+    emp_id INT PRIMARY KEY,
+    salary DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE salary_history (
+    history_id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_id INT NOT NULL,
+    old_salary DECIMAL(10,2) NOT NULL,
+    new_salary DECIMAL(10,2) NOT NULL,
+    reason VARCHAR(255) NOT NULL
+);
+
+INSERT INTO employees VALUES (1, 'Tran Van Nam');
+INSERT INTO salaries VALUES (1, 12000000.00);
+
+-- Giao dịch tăng lương và ghi vết lịch sử trên Web SQLite:
+BEGIN TRANSACTION;
+INSERT INTO salary_history (emp_id, old_salary, new_salary, reason)
+VALUES (1, 12000000.00, 16000000.00, 'Thang chuc Truong phong');
+UPDATE salaries SET salary = 16000000.00 WHERE emp_id = 1;
+COMMIT;
+
+SELECT * FROM salaries WHERE emp_id = 1;
+SELECT * FROM salary_history;`
+      },
+
 
     };
 

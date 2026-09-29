@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lý thuyết Session 11 · Transaction & Tiêu chuẩn ACID</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* RK WORKSPACE DESIGN SYSTEM (/rk-ui) - Nền sáng tối giản, viền xám, CHỈ SQL NỀN ĐEN */
+    :root {
+      --bg-main: #f4f4f4;
+      --bg-card: #ffffff;
+      --bg-soft: #f7f7f7;
+      --line: #e5e5e5;
+      --line-strong: #d9d9d9;
+      --black: #111111;
+      --ink: #202020;
+      --text-muted: #666666;
+      --code-bg: #111111;
+      --code-text: #f5f5f5;
+      --font-system: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-code: 'JetBrains Mono', Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-main);
+      color: var(--ink);
+      font-family: var(--font-system);
+      line-height: 1.6;
+      padding: 16px 20px 48px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header {
+      background: var(--bg-card);
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .badge {
+      display: inline-block;
+      background: var(--bg-soft);
+      color: var(--black);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+      border: 1px solid var(--line);
+    }
+    h1 { font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 6px; letter-spacing: -.03em; }
+    p.lead { font-size: 12.5px; color: #444; line-height: 1.6; margin-bottom: 12px; }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    h2 { font-size: 15px; font-weight: 800; color: var(--black); margin-bottom: 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+    h3 { font-size: 13px; font-weight: 700; color: #222; margin: 12px 0 6px; }
+    p, li { font-size: 12.5px; color: #333; line-height: 1.6; }
+    ul, ol { padding-left: 18px; margin-bottom: 10px; }
+    li { margin-bottom: 4px; }
+    /* QUY TẮC BẤT KHẢ XÂM PHẠM: CHỈ KHUNG SQL MỚI ĐƯỢC NỀN ĐEN */
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-family: var(--font-code);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 14px 16px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 10px 0 14px;
+      border: 1px solid #222;
+    }
+    code { font-family: var(--font-code); font-size: 11.5px; }
+    .note-box {
+      background: var(--bg-soft);
+      border-left: 3px solid var(--black);
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-size: 12px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Module 2 · Session 11</span>
+      <h1>Lý thuyết Giao dịch Transaction & Hệ Tiêu Chuẩn ACID</h1>
+      <p class="lead">Làm chủ kỹ thuật quản lý giao dịch an toàn: START TRANSACTION, COMMIT, ROLLBACK, xử lý All-or-Nothing và cơ chế tự động Rollback qua DECLARE EXIT HANDLER.</p>
+    </header>
+    
+    <div class="card">
+      <h2>1. Hệ Tiêu Chuẩn ACID trong Cơ Sở Dữ Liệu</h2>
+      <p>Một hệ thống tài chính ngân hàng hoặc bán hàng trực tuyến không thể thiếu Transaction để ngăn chặn lỗi "tiền bị trừ ở tài khoản A nhưng tài khoản B chưa nhận được".</p>
+      
+      <div class="grid-2">
+        <div class="note-box">
+          <strong>A - Atomicity (Nguyên tử):</strong>
+          <p>Tất cả câu lệnh cùng thành công hoặc cùng thất bại hoàn toàn. Không bao giờ tồn tại trạng thái dở dang.</p>
+          <pre><code>START TRANSACTION;
+UPDATE accounts SET balance = balance - 500 WHERE id = 1;
+UPDATE accounts SET balance = balance + 500 WHERE id = 2;
+COMMIT;</code></pre>
+        </div>
+        <div class="note-box">
+          <strong>C - Consistency (Nhất quán):</strong>
+          <p>Tổng giá trị và các ràng buộc dữ liệu trước và sau giao dịch luôn được bảo đảm chính xác.</p>
+          <pre><code>-- Nếu phát hiện số dư âm:
+IF balance < 0 THEN
+    ROLLBACK;
+END IF;</code></pre>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="note-box">
+          <strong>I - Isolation (Độc lập):</strong>
+          <p>Nhiều giao dịch diễn ra đồng thời không làm sai lệch kết quả của nhau.</p>
+        </div>
+        <div class="note-box">
+          <strong>D - Durability (Bền vững):</strong>
+          <p>Dữ liệu sau khi COMMIT được ghi an toàn xuống ổ cứng, chống sập nguồn.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2. Xử lý Ngoại lệ tự động với DECLARE EXIT HANDLER</h2>
+      <p>Khi nhúng Transaction vào Stored Procedure, ta sử dụng <code>EXIT HANDLER FOR SQLEXCEPTION</code> để tự động hoàn tác khi xảy ra bất kỳ lỗi hệ thống nào:</p>
+      <pre><code>DELIMITER //
+CREATE PROCEDURE sp_safe_transfer(IN p_from INT, IN p_to INT, IN p_val DECIMAL(12,2))
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SELECT 'Lỗi SQL! Toàn bộ giao dịch đã được ROLLBACK an toàn.' AS err;
+    END;
+
+    START TRANSACTION;
+    UPDATE accounts SET balance = balance - p_val WHERE id = p_from;
+    UPDATE accounts SET balance = balance + p_val WHERE id = p_to;
+    COMMIT;
+END //
+DELIMITER ;</code></pre>
+    </div>
+
+  </div>
+</body>
+</html>
