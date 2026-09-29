@@ -5364,26 +5364,61 @@ SELECT * FROM salary_history;`
         const engine = await getSqliteEngine();
         const database = new engine.Database();
 
-        // Thay thế an toàn các lệnh MySQL đặc thù, giữ nguyên chính xác số dòng (1-to-1 line mapping)
-        let cleanSql = sql
-          .replace(/^[ \t]*CREATE\s+DATABASE\b.*$/gim, '-- $&')
-          .replace(/^[ \t]*USE\b.*$/gim, '-- $&')
-          .replace(/^[ \t]*SET\b.*$/gim, '-- $&')
-          .replace(/\bAUTO_INCREMENT\b/gi, '')
-          .replace(/CREATE\s+OR\s+REPLACE\s+VIEW/gi, 'CREATE VIEW')
-          .replace(/^[ \t]*.*(?:DELIMITER|\$\$).*$/gim, '-- $&')
-          .replace(/^[ \t]*CALL\b.*$/gim, '-- $&')
-          .replace(/^[ \t]*DROP\s+VIEW\b.*$/gim, '-- $&')
-          .replace(/^[ \t]*DROP\s+INDEX\b.*$/gim, '-- $&')
-          .replace(/^[ \t]*DROP\s+TRIGGER\b.*$/gim, '-- $&')
-          .replace(/^[ \t]*DROP\s+PROCEDURE\b.*$/gim, '-- $&')
-          .replace(/^[ \t]*SELECT\s+@.*$/gim, '-- $&')
-          .replace(/CREATE\s+PROCEDURE[\s\S]*?END(?:\s*\$\$|\s*;)?/gi, (match) => {
-            return '/* Stored Procedure: MySQL Only */' + '\n'.repeat((match.match(/\n/g) || []).length);
-          })
-          .replace(/CREATE\s+TRIGGER[\s\S]*?END(?:\s*\$\$|\s*;)?/gi, (match) => {
-            return '/* Trigger: MySQL Only */' + '\n'.repeat((match.match(/\n/g) || []).length);
-          });
+        // Thay thế an toàn các lệnh MySQL đặc thù, giữ nguyên chính xác 1-to-1 số dòng
+        const rawLines = sql.split('\n');
+        let inProcedure = false;
+        const cleanedLines = [];
+
+        for (let i = 0; i < rawLines.length; i++) {
+          let line = rawLines[i];
+          const trimmed = line.trim();
+
+          // Nếu dòng đã được comment bằng -- hoặc /* thì giữ nguyên tuyệt đối
+          if (trimmed.startsWith('--') || trimmed.startsWith('/*') || trimmed.startsWith('*')) {
+            cleanedLines.push(line);
+            continue;
+          }
+
+          // Phát hiện bắt đầu Stored Procedure / Function chưa comment
+          if (/^\s*CREATE\s+(?:PROCEDURE|FUNCTION)\b/i.test(line)) {
+            inProcedure = true;
+            cleanedLines.push('-- ' + line);
+            continue;
+          }
+
+          if (inProcedure) {
+            cleanedLines.push('-- ' + line);
+            // Kết thúc thủ tục khi gặp END // hoặc END $$ hoặc END; độc lập (không phải END IF / END CASE)
+            if (/^\s*END\b(?!\s+(?:IF|CASE|LOOP|REPEAT))\s*(?:;|\$\$|\/\/)?/i.test(line) || /^\s*DELIMITER\s*;/i.test(line)) {
+              inProcedure = false;
+            }
+            continue;
+          }
+
+          // Vô hiệu hóa an toàn các lệnh MySQL đặc thù
+          if (/^\s*(?:CREATE\s+DATABASE|USE|SET|CALL|DELIMITER|\$\$)\b/i.test(line)) {
+            cleanedLines.push('-- ' + line);
+            continue;
+          }
+
+          if (/^\s*(?:DROP\s+VIEW|DROP\s+INDEX|DROP\s+TRIGGER|DROP\s+PROCEDURE)\b/i.test(line)) {
+            cleanedLines.push('-- ' + line);
+            continue;
+          }
+
+          if (/^\s*SELECT\s+@/i.test(line)) {
+            cleanedLines.push('-- ' + line);
+            continue;
+          }
+
+          // Chuẩn hóa cú pháp tương thích SQLite
+          line = line.replace(/\bAUTO_INCREMENT\b/gi, '');
+          line = line.replace(/CREATE\s+OR\s+REPLACE\s+VIEW/gi, 'CREATE VIEW');
+
+          cleanedLines.push(line);
+        }
+
+        const cleanSql = cleanedLines.join('\n');
 
         const statements = splitSqlStatements(cleanSql);
         let failingStmt = null;
