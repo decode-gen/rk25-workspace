@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lý thuyết Session 08 · Stored Procedures trong MySQL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* RK WORKSPACE DESIGN SYSTEM (/rk-ui) - Nền sáng tối giản, viền xám, CHỈ SQL NỀN ĐEN */
+    :root {
+      --bg-main: #f4f4f4;
+      --bg-card: #ffffff;
+      --bg-soft: #f7f7f7;
+      --line: #e5e5e5;
+      --line-strong: #d9d9d9;
+      --black: #111111;
+      --ink: #202020;
+      --text-muted: #666666;
+      --code-bg: #111111;
+      --code-text: #f5f5f5;
+      --font-system: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-code: 'JetBrains Mono', Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-main);
+      color: var(--ink);
+      font-family: var(--font-system);
+      line-height: 1.6;
+      padding: 16px 20px 48px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header {
+      background: var(--bg-card);
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .badge {
+      display: inline-block;
+      background: var(--bg-soft);
+      color: var(--black);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+      border: 1px solid var(--line);
+    }
+    h1 { font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 6px; letter-spacing: -.03em; }
+    p.lead { font-size: 12.5px; color: #444; line-height: 1.6; margin-bottom: 12px; }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    h2 { font-size: 15px; font-weight: 800; color: var(--black); margin-bottom: 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+    h3 { font-size: 13px; font-weight: 700; color: #222; margin: 12px 0 6px; }
+    p, li { font-size: 12.5px; color: #333; line-height: 1.6; }
+    ul, ol { padding-left: 18px; margin-bottom: 10px; }
+    li { margin-bottom: 4px; }
+    /* QUY TẮC BẤT KHẢ XÂM PHẠM: CHỈ KHUNG SQL MỚI ĐƯỢC NỀN ĐEN */
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-family: var(--font-code);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 14px 16px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 10px 0 14px;
+      border: 1px solid #222;
+    }
+    code { font-family: var(--font-code); font-size: 11.5px; }
+    .note-box {
+      background: var(--bg-soft);
+      border-left: 3px solid var(--black);
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-size: 12px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Module 2 · Session 08</span>
+      <h1>Lý thuyết Stored Procedures trong MySQL</h1>
+      <p class="lead">Tìm hiểu toàn diện về Stored Procedure: nguyên lý hoạt động, cú pháp DELIMITER, tham số IN / OUT, khai báo biến DECLARE và cấu trúc rẽ nhánh điều khiển IF/CASE.</p>
+    </header>
+    
+    <div class="card">
+      <h2>1. Khái niệm & Cú pháp Stored Procedure</h2>
+      <p><strong>Stored Procedure (Thủ tục lưu trữ)</strong> là một đoạn chương trình gồm nhiều câu lệnh SQL được biên dịch và lưu trữ vĩnh viễn trên Database Server. Ứng dụng gọi thủ tục thông qua lệnh <code>CALL</code>.</p>
+      
+      <div class="grid-2">
+        <div class="note-box">
+          <strong>Cú pháp tạo Stored Procedure (MySQL):</strong>
+          <pre><code>DELIMITER //
+CREATE PROCEDURE sp_example(
+    IN p_id INT,
+    OUT p_name VARCHAR(100)
+)
+BEGIN
+    SELECT full_name INTO p_name 
+    FROM employees 
+    WHERE id = p_id;
+END //
+DELIMITER ;</code></pre>
+        </div>
+        <div class="note-box">
+          <strong>Gọi và thực thi Stored Procedure:</strong>
+          <pre><code>-- Gọi thủ tục có tham số OUT:
+CALL sp_example(1, @emp_name);
+
+-- Xem kết quả trả ra biến session:
+SELECT @emp_name AS employee_name;
+
+-- Xóa thủ tục:
+DROP PROCEDURE IF EXISTS sp_example;</code></pre>
+        </div>
+      </div>
+
+      <h3>Lợi ích cốt lõi của Stored Procedure:</h3>
+      <ul>
+        <li><strong>Tăng hiệu năng:</strong> SQL Server tối ưu hóa và lưu sẵn kế hoạch thực thi trong bộ nhớ đệm (Plan Cache), không mất thời gian parse lại câu lệnh.</li>
+        <li><strong>Tiết kiệm băng thông:</strong> Client chỉ gửi tên procedure và đối số qua mạng thay vì gửi câu lệnh SQL đồ sộ.</li>
+        <li><strong>Bảo mật & Ngăn chặn SQL Injection:</strong> Ẩn hoàn toàn cấu trúc bảng vật lý phía sau thủ tục và ép kiểu chặt chẽ cho tham số.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>2. Tham số (IN, OUT, INOUT) & Cấu trúc điều khiển (IF, CASE)</h2>
+      <div class="grid-2">
+        <div class="note-box">
+          <strong>Khai báo biến & IF - ELSE:</strong>
+          <pre><code>DELIMITER //
+CREATE PROCEDURE sp_eval_salary(IN p_salary DECIMAL(10,2))
+BEGIN
+    DECLARE v_result VARCHAR(30);
+    IF p_salary >= 15000000 THEN
+        SET v_result = 'Thu nhập cao';
+    ELSE
+        SET v_result = 'Thu nhập cơ bản';
+    END IF;
+    SELECT v_result AS danh_gia;
+END //
+DELIMITER ;</code></pre>
+        </div>
+        <div class="note-box">
+          <strong>Cấu trúc rẽ nhánh CASE - WHEN:</strong>
+          <pre><code>CASE 
+    WHEN score >= 8.0 THEN SET rank = 'Giỏi';
+    WHEN score >= 6.5 THEN SET rank = 'Khá';
+    WHEN score >= 5.0 THEN SET rank = 'Trung bình';
+    ELSE SET rank = 'Yếu';
+END CASE;</code></pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
