@@ -44,6 +44,7 @@
     .module-summary > span:first-of-type { flex: 1; text-align: left; }
     .module-summary .status { margin-left: auto; text-align: right; flex-shrink: 0; }
     .status { color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .08em; }
+    .status.status-locked { color: #777; background: #eee; padding: 2px 5px; border-radius: 4px; font-size: 8.5px; border: 1px solid #ddd; letter-spacing: 0; }
     .session-tree { padding: 0 8px 8px; }
     .session-tree details { margin: 4px 0; border: 0; border-radius: 5px; background: var(--soft); }
     .session-tree summary { padding: 8px; color: #444; font-size: 11px; }
@@ -51,6 +52,8 @@
     .item { display: block; border-radius: 5px; padding: 7px 8px; color: #666; text-decoration: none; font-size: 10px; line-height: 1.35; }
     .item:hover, .item.active { background: var(--black); color: var(--white); }
     .item.disabled { color: #aaa; cursor: default; }
+    .item.locked-item { color: #888; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+    .item.locked-item:hover { background: #fdf2f2; color: #991b1b; }
     .main { min-width: 0; min-height: 100vh; display: flex; flex-direction: column; }
     .topbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 20px; min-height: 62px; border-bottom: 1px solid var(--line); background: var(--white); position: sticky; top: 0; z-index: 1000; }
     .crumb { color: var(--muted); font-size: 11px; }
@@ -831,9 +834,9 @@
             </div></details>
           </div>
         </details>
-        <details data-module="module 3 java core"><summary class="module-summary"><span>Module 3 · Java Core</span><span class="status">Kế hoạch</span></summary><div class="items"><a class="item" href="../Module_3_Java_Core/index.html" data-title="Module 3 · Java Core" data-module="Module 3 · Java Core" data-session="Overview">Xem đề cương học phần</a></div></details>
-        <details data-module="module 4 fe it"><summary class="module-summary"><span>Module 4 · FE IT</span><span class="status">Kế hoạch</span></summary><div class="items"><a class="item" href="../Module_4_FE_IT/index.html" data-title="Module 4 · FE IT" data-module="Module 4 · FE IT" data-session="Overview">Xem đề cương học phần</a></div></details>
-        <details data-module="module 5 java web"><summary class="module-summary"><span>Module 5 · Java Web</span><span class="status">Kế hoạch</span></summary><div class="items"><a class="item" href="../Module_5_Java_Web/index.html" data-title="Module 5 · Java Web" data-module="Module 5 · Java Web" data-session="Overview">Xem đề cương học phần</a></div></details>
+        <details class="module-locked" data-module="module 3 java core"><summary class="module-summary"><span>Module 3 · Java Core</span><span class="status status-locked">🔒 Đang khóa</span></summary><div class="items"><div class="item locked-item" onclick="showLockedModule('Module 3 · Java Core')"><span style="font-size:10px;">🔒</span><span>Chưa mở theo tiến độ</span></div></div></details>
+        <details class="module-locked" data-module="module 4 fe it"><summary class="module-summary"><span>Module 4 · FE IT</span><span class="status status-locked">🔒 Đang khóa</span></summary><div class="items"><div class="item locked-item" onclick="showLockedModule('Module 4 · FE IT')"><span style="font-size:10px;">🔒</span><span>Chưa mở theo tiến độ</span></div></div></details>
+        <details class="module-locked" data-module="module 5 java web"><summary class="module-summary"><span>Module 5 · Java Web</span><span class="status status-locked">🔒 Đang khóa</span></summary><div class="items"><div class="item locked-item" onclick="showLockedModule('Module 5 · Java Web')"><span style="font-size:10px;">🔒</span><span>Chưa mở theo tiến độ</span></div></div></details>
       </div>
     </aside>
     <main class="main">
@@ -6170,6 +6173,32 @@ Hãy trả lời bằng tiếng Việt sư phạm, định dạng Markdown rõ r
         }
       }
     });
+
+    function showLockedModule(moduleName) {
+      toast('🔒 ' + moduleName + ' đang tạm khóa theo tiến độ đào tạo.');
+      document.getElementById('crumbModule').textContent = moduleName;
+      document.getElementById('crumbTitle').textContent = 'Học phần tạm khóa';
+      document.getElementById('pageTitle').textContent = moduleName;
+      document.getElementById('previewTitle').textContent = 'Học phần đang khóa';
+      document.getElementById('pageDescription').textContent = 'Học phần này hiện đang được tạm khóa và bảo lưu theo lộ trình giảng dạy của Rikkei Academy.';
+      document.querySelectorAll('.item').forEach((node) => node.classList.remove('active'));
+      const previewBox = document.getElementById('previewBox');
+      previewBox.className = 'empty';
+      previewBox.innerHTML = `
+        <div style="max-width:520px;margin:40px auto;text-align:center;padding:36px 28px;background:#ffffff;border:1px solid #e5e5e5;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,0.03);">
+          <div style="font-size:36px;margin-bottom:14px;line-height:1;">🔒</div>
+          <div style="font-size:16px;font-weight:700;color:#111111;margin-bottom:8px;">Học Phần Đang Tạm Khóa</div>
+          <p style="font-size:12.5px;color:#666666;line-height:1.6;margin-bottom:20px;">
+            Quyền truy cập nội dung <strong>${escapeSqlHtml(moduleName)}</strong> hiện đang được bảo lưu theo kế hoạch đào tạo của giảng viên phụ trách.
+            Học viên vui lòng hoàn thành toàn bộ bài tập và chuyên đề của <strong>Module 2: Cơ sở dữ liệu &amp; SQL</strong> trước khi mở khóa học phần tiếp theo.
+          </p>
+          <div style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:#f7f7f7;border:1px solid #e5e5e5;border-radius:20px;font-size:11px;color:#555555;font-weight:600;">
+            <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#94a3b8;"></span>
+            Trạng thái: Chưa mở (Restricted Access)
+          </div>
+        </div>
+      `;
+    }
 
     function selectItem(item, fromHistory = false, isInitial = false) {
       if (!item) return;

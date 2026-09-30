@@ -3,449 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module 5 · Java Web &amp; Enterprise Framework (Spring Boot) | Rikkei Bootcamp</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Học phần đang tạm khóa | Rikkei Academy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-main: #f4f4f4;
-      --bg-card: #ffffff;
-      --bg-subtle: #fafafa;
-      --bg-soft: #f7f7f7;
-      --line: #e5e5e5;
-      --line-strong: #d9d9d9;
-      --line-table: #dedede;
-      --black: #111111;
-      --ink: #202020;
-      --text-muted: #666666;
-      --text-disabled: #999999;
-      --white: #ffffff;
-      --status-bg: #f3f4f6;
-      --status-text: #1f2937;
-      --status-border: #e5e7eb;
-      --primary-tag-bg: #111111;
-      --primary-tag-text: #ffffff;
-      --accent-badge-bg: #eff6ff;
-      --accent-badge-border: #bfdbfe;
-      --accent-badge-text: #1e40af;
-      --font-system: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --font-code: 'JetBrains Mono', Consolas, monospace;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: var(--font-system);
-      background-color: var(--bg-main);
-      color: var(--ink);
-      line-height: 1.6;
-      padding: 24px 20px;
-    }
-
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      background: var(--bg-card);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 32px 36px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    }
-
-    .header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 20px;
-      margin-bottom: 24px;
-      border-bottom: 1px solid var(--line);
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 6px;
-      background: var(--white);
-      color: var(--ink);
-      border: 1px solid var(--line-strong);
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 600;
-      transition: all 0.15s ease;
-    }
-
-    .back-btn:hover {
-      background: var(--bg-soft);
-      border-color: var(--black);
-      color: var(--black);
-    }
-
-    .meta-tag {
-      display: inline-block;
-      padding: 4px 10px;
-      background: var(--accent-badge-bg);
-      border: 1px solid var(--accent-badge-border);
-      color: var(--accent-badge-text);
-      font-size: 11px;
-      font-weight: 700;
-      border-radius: 20px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .hero-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--black);
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .hero-subtitle {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
-    /* Notice Box */
-    .notice-card {
-      background: var(--bg-subtle);
-      border: 1px solid var(--line);
-      border-left: 4px solid var(--black);
-      border-radius: 0 8px 8px 0;
-      padding: 16px 20px;
-      margin-bottom: 30px;
-    }
-
-    .notice-header {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f4f4f4;
+      color: #111111;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      font-size: 13px;
-      color: var(--black);
-      margin-bottom: 6px;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
     }
-
-    .notice-badge {
-      display: inline-block;
-      padding: 2px 8px;
-      background: #fef3c7;
-      border: 1px solid #fde68a;
-      color: #92400e;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .notice-desc {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* Roadmap Timeline */
-    .section-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--black);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .section-counter {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .curriculum-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 12px;
-      margin-bottom: 30px;
-    }
-
-    .curriculum-item {
-      background: var(--bg-subtle);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 14px 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: border-color 0.15s ease;
-    }
-
-    .curriculum-item:hover {
-      border-color: var(--line-strong);
-      background: var(--white);
-    }
-
-    .session-code {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-      font-family: var(--font-code);
-    }
-
-    .session-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.4;
-      margin-bottom: 8px;
-    }
-
-    .session-status {
-      font-size: 11px;
-      color: var(--text-disabled);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-weight: 500;
-    }
-
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #cbd5e1;
-      display: inline-block;
-    }
-
-    /* Program Progress Table */
-    .progress-table {
+    .lock-card {
+      max-width: 460px;
       width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-      margin-top: 10px;
-      border: 1px solid var(--line-table);
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    }
+    .lock-icon {
+      font-size: 42px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #111111;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 13px;
+      color: #666666;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .btn-back {
+      display: inline-block;
+      padding: 8px 18px;
+      background: #111111;
+      color: #ffffff;
+      text-decoration: none;
       border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .progress-table th {
-      background: #f1f1f1;
-      color: var(--black);
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--line-table);
-      text-align: left;
-    }
-
-    .progress-table td {
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--line-table);
-      color: #333333;
-    }
-
-    .progress-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .tag-done {
-      display: inline-block;
-      padding: 2px 8px;
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      color: #065f46;
-      border-radius: 4px;
-      font-size: 10.5px;
-      font-weight: 700;
-    }
-
-    .tag-active {
-      display: inline-block;
-      padding: 2px 8px;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #1e40af;
-      border-radius: 4px;
-      font-size: 10.5px;
-      font-weight: 700;
-    }
-
-    .tag-upcoming {
-      display: inline-block;
-      padding: 2px 8px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      color: #64748b;
-      border-radius: 4px;
-      font-size: 10.5px;
+      font-size: 12px;
       font-weight: 600;
+      transition: background 0.15s ease;
     }
-
-    .footer-note {
+    .btn-back:hover {
+      background: #333333;
+    }
+    .footer-text {
       margin-top: 24px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-      font-size: 11.5px;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
+      font-size: 11px;
+      color: #999999;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header-bar">
-      <a href="../Dashboard_v1/index.html" class="back-btn">← Quay lại Dashboard</a>
-      <span class="meta-tag">Lộ trình đào tạo Rikkei Academy</span>
-    </header>
-
-    <h1 class="hero-title">Module 5 · Java Web &amp; Enterprise Framework (Spring Boot)</h1>
-    <p class="hero-subtitle">Học phần phát triển ứng dụng cấp doanh nghiệp quy mô lớn (Enterprise Grade), thiết kế kiến trúc RESTful Microservices, tích hợp CSDL quan hệ với Spring Data JPA và bảo mật với Spring Security.</p>
-
-    <div class="notice-card">
-      <div class="notice-header">
-        <span class="notice-badge">Kế hoạch đào tạo</span>
-        <span>Học phần tốt nghiệp theo lộ trình đào tạo</span>
-      </div>
-      <p class="notice-desc">
-        Hệ thống đề tài đồ án tốt nghiệp, bài tập thực hành kiến trúc doanh nghiệp và tài liệu chuyên sâu của <strong>Module 5</strong> sẽ được mở theo tiến độ giảng dạy trên lớp của giảng viên phụ trách. Học viên hiện đang tập trung hoàn thành các bài tập thực hành và đồ án của <strong>Module 2: Cơ sở dữ liệu &amp; SQL</strong>.
-      </p>
-    </div>
-
-    <div class="section-title">
-      <span>Đề cương học phần (Syllabus Roadmap)</span>
-      <span class="section-counter">Dự kiến: 12 Chuyên đề</span>
-    </div>
-
-    <div class="curriculum-grid">
-      <div class="curriculum-item">
-        <div class="session-code">Session 01</div>
-        <div class="session-name">Kiến trúc Web Server, Giao thức HTTP, Servlet &amp; JSP cơ bản</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 02</div>
-        <div class="session-name">Mô hình kiến trúc MVC (Model - View - Controller) trong Java Web</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 03</div>
-        <div class="session-name">Spring Framework Core: IoC Container &amp; Dependency Injection (DI)</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 04</div>
-        <div class="session-name">Spring Boot 3: Cấu hình tự động, Starter Dependencies &amp; Profiles</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 05</div>
-        <div class="session-name">Xây dựng RESTful API chuyên nghiệp với Spring Web MVC</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 06</div>
-        <div class="session-name">Tương tác Database: Spring Data JPA, Hibernate ORM &amp; MySQL</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 07</div>
-        <div class="session-name">Data Validation, Xử lý lỗi tập trung (@ControllerAdvice) &amp; DTO Pattern</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 08</div>
-        <div class="session-name">Bảo mật hệ thống: Spring Security 6, JWT (JSON Web Token) Authentication</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 09</div>
-        <div class="session-name">Quan hệ thực thể phức tạp (OneToMany, ManyToMany), Phân trang &amp; Sắp xếp</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 10</div>
-        <div class="session-name">Tích hợp dịch vụ: Upload tệp tin lên Cloudinary, Gửi Mail &amp; Thanh toán</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 11</div>
-        <div class="session-name">Kiểm thử phần mềm với JUnit 5, Mockito &amp; Đóng gói Docker Container</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-      <div class="curriculum-item">
-        <div class="session-code">Session 12</div>
-        <div class="session-name">Đồ án tốt nghiệp thực chiến: Hệ thống Web Fullstack hoàn chỉnh</div>
-        <div class="session-status"><span class="status-dot"></span> Sắp diễn ra</div>
-      </div>
-    </div>
-
-    <div class="section-title">
-      <span>Tiến độ tổng thể chương trình Bootcamp</span>
-    </div>
-
-    <table class="progress-table">
-      <thead>
-        <tr>
-          <th>Học phần</th>
-          <th>Tên chuyên đề</th>
-          <th>Thời lượng</th>
-          <th>Trạng thái</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Module 1</strong></td>
-          <td>Nhập môn lập trình &amp; Thuật toán cơ bản</td>
-          <td>16 Buổi</td>
-          <td><span class="tag-done">Đã hoàn thành</span></td>
-        </tr>
-        <tr>
-          <td><strong>Module 2</strong></td>
-          <td>Cơ sở dữ liệu quan hệ, MySQL &amp; Tối ưu hóa truy vấn</td>
-          <td>12 Buổi</td>
-          <td><span class="tag-active">Đang học &amp; Thực hành</span></td>
-        </tr>
-        <tr>
-          <td><strong>Module 3</strong></td>
-          <td>Lập trình Java Core &amp; Lập trình hướng đối tượng (OOP)</td>
-          <td>12 Buổi</td>
-          <td><span class="tag-upcoming">Giai đoạn kế tiếp</span></td>
-        </tr>
-        <tr>
-          <td><strong>Module 4</strong></td>
-          <td>Front-End Web Development (HTML5, CSS3, JavaScript, React)</td>
-          <td>12 Buổi</td>
-          <td><span class="tag-upcoming">Kế hoạch</span></td>
-        </tr>
-        <tr>
-          <td><strong>Module 5</strong></td>
-          <td>Lập trình Java Web &amp; Enterprise Framework (Spring Boot)</td>
-          <td>12 Buổi</td>
-          <td><span class="tag-upcoming">Kế hoạch tốt nghiệp</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <footer class="footer-note">
-      <span>Rikkei Education Bootcamp · Khóa đào tạo Kỹ sư Phần mềm</span>
-      <span>Hệ thống học tập và tra cứu trực tuyến</span>
-    </footer>
+  <div class="lock-card">
+    <div class="lock-icon">🔒</div>
+    <h1>Học Phần Đang Tạm Khóa</h1>
+    <p>Quyền truy cập học phần này hiện đang được bảo lưu theo kế hoạch đào tạo của Rikkei Academy. Vui lòng quay lại Dashboard chính.</p>
+    <a href="../Dashboard_v1/index.html" class="btn-back">← Quay lại Dashboard</a>
+    <div class="footer-text">Rikkei Education · Access Restricted</div>
   </div>
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'u')) {
+        e.preventDefault();
+      }
+    });
+    setTimeout(() => {
+      window.location.href = '../Dashboard_v1/index.html';
+    }, 2500);
+  </script>
 </body>
 </html>
