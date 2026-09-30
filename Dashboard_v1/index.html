@@ -831,15 +831,15 @@
             </div></details>
           </div>
         </details>
-        <details data-module="module 3 java core"><summary class="module-summary"><span>Module 3 · Java Core</span><span class="status">1 HTML</span></summary><div class="items"><a class="item" href="../Module_3_Java_Core/index.html" data-title="Module 3 · Java Core" data-module="Module 3 · Java Core" data-session="Overview">Mở trang module</a></div></details>
-        <details data-module="module 4 fe it"><summary class="module-summary"><span>Module 4 · FE IT</span><span class="status">1 HTML</span></summary><div class="items"><a class="item" href="../Module_4_FE_IT/index.html" data-title="Module 4 · FE IT" data-module="Module 4 · FE IT" data-session="Overview">Mở trang module</a></div></details>
-        <details data-module="module 5 java web"><summary class="module-summary"><span>Module 5 · Java Web</span><span class="status">1 HTML</span></summary><div class="items"><a class="item" href="../Module_5_Java_Web/index.html" data-title="Module 5 · Java Web" data-module="Module 5 · Java Web" data-session="Overview">Mở trang module</a></div></details>
+        <details data-module="module 3 java core"><summary class="module-summary"><span>Module 3 · Java Core</span><span class="status">Kế hoạch</span></summary><div class="items"><a class="item" href="../Module_3_Java_Core/index.html" data-title="Module 3 · Java Core" data-module="Module 3 · Java Core" data-session="Overview">Xem đề cương học phần</a></div></details>
+        <details data-module="module 4 fe it"><summary class="module-summary"><span>Module 4 · FE IT</span><span class="status">Kế hoạch</span></summary><div class="items"><a class="item" href="../Module_4_FE_IT/index.html" data-title="Module 4 · FE IT" data-module="Module 4 · FE IT" data-session="Overview">Xem đề cương học phần</a></div></details>
+        <details data-module="module 5 java web"><summary class="module-summary"><span>Module 5 · Java Web</span><span class="status">Kế hoạch</span></summary><div class="items"><a class="item" href="../Module_5_Java_Web/index.html" data-title="Module 5 · Java Web" data-module="Module 5 · Java Web" data-session="Overview">Xem đề cương học phần</a></div></details>
       </div>
     </aside>
     <main class="main">
       <header class="topbar"><div class="crumb"><span id="crumbModule">Dashboard v1</span> &nbsp;›&nbsp; <strong id="crumbTitle">Chọn một bài tập</strong></div><div class="actions"><button class="sql-studio-trigger" id="sqlStudioTriggerBtn" type="button" onclick="openSqlStudioModal()" title="Mở SQL Studio Full màn hình (Soạn thảo &amp; Preview tương tác)"><span class="sql-studio-badge">SQL</span> <span>Studio</span></button></div></header>
       <div class="content">
-        <section class="intro"><h1 id="pageTitle">Learning Dashboard</h1><p id="pageDescription">Sidebar bên trái là cây thư mục học tập. Chọn một BTVN hoặc trang module để hiển thị HTML trực tiếp trong khung preview bên phải.</p><div class="stats"><div class="stat"><strong>5</strong><span>Modules</span></div><div class="stat"><strong>16</strong><span>Sessions M1</span></div><div class="stat"><strong>12</strong><span>Sessions M2</span></div><div class="stat"><strong>Live</strong><span>HTML Preview</span></div></div></section>
+        <section class="intro"><h1 id="pageTitle">Learning Dashboard</h1><p id="pageDescription">Hệ thống tra cứu lộ trình đào tạo, tài liệu chuyên đề và thực hành bài tập Rikkei Bootcamp.</p><div class="stats"><div class="stat"><strong>5</strong><span>Modules</span></div><div class="stat"><strong>16</strong><span>Sessions M1</span></div><div class="stat"><strong>12</strong><span>Sessions M2</span></div><div class="stat"><strong>Live</strong><span>HTML Preview</span></div></div></section>
         <section class="preview-wrap" id="previewWrap">
           <div class="preview">
             <div class="preview-head">
@@ -6204,13 +6204,13 @@ Hãy trả lời bằng tiếng Việt sư phạm, định dạng Markdown rõ r
       }
 
       if (!selectedHref) {
-        document.getElementById('pageDescription').textContent = 'Mục này hiện đang để trống, chờ bạn gửi dữ liệu bài tập.';
+        document.getElementById('pageDescription').textContent = 'Chuyên đề học tập đang trong kế hoạch giảng dạy theo tiến độ của học phần.';
         previewBox.className = 'empty';
-        previewBox.innerHTML = '<div style="font-size:14px;font-weight:bold;margin-bottom:8px;">⏳ Đang chờ nạp dữ liệu bài tập</div>Mục này đang để trống. Bạn chỉ cần gửi nội dung đề bài, hệ thống sẽ tự động cập nhật và sinh file SQL tương ứng.';
+        previewBox.innerHTML = '<div style="font-size:14px;font-weight:bold;margin-bottom:8px;color:#111;">Kế hoạch đào tạo chuyên đề</div>Nội dung bài tập và tài liệu thực hành sẽ được mở theo tiến độ học tập trên lớp của giảng viên.';
         return;
       }
 
-      document.getElementById('pageDescription').textContent = 'Nội dung HTML đang được hiển thị trực tiếp từ thư mục dự án. Bạn có thể mở trang riêng để thao tác đầy đủ.';
+      document.getElementById('pageDescription').textContent = 'Đề cương chi tiết và lộ trình học tập chuyên đề của Rikkei Academy.';
       previewBox.className = 'frame-box';
       previewBox.innerHTML = '<iframe title="HTML preview" src="' + selectedHref + '"></iframe>';
     }
